@@ -1,0 +1,52 @@
+<% show_goal = @leaderboard.has_goal && !is_virtual_race?(@challenge) %>
+
+<table class="table is-striped is-fullwidth">
+  <thead>
+    <th class="has-text-centered">Rank</th>
+    <th />
+    <th>Name</th>
+
+    <%= if include_challenge_activities?(@leaderboard) do %>
+      <th class="has-text-centered">Activities</th>
+    <% end %>
+
+    <th class="has-text-centered" title="<%= challenge_leaderboard_title(@conn, @leaderboard) %>">
+      <%= challenge_leaderboard_rank_by(@leaderboard) %>
+    </th>
+
+    <%= if show_goal do %>
+      <th class="is-hidden-mobile" />
+      <th class="is-hidden-mobile" />
+    <% end %>
+  </thead>
+  <tbody>
+    <%= for entry <- @entries do %>
+    <tr class="<%= current_athlete_class(@conn, entry) %>">
+      <td class="has-text-centered"><%= entry.rank %></td>
+      <td style="padding: 10px 0;">
+        <%= if entry.athlete_profile do %>
+          <figure class="image is-32x32">
+            <img class="is-avatar" src="<%= entry.athlete_profile %>">
+          </figure>
+        <% end %>
+      </td>
+      <td><%= athlete_name(entry) |> link(to: strava_athlete_url(entry.athlete_uuid), target: "_blank", class: "is-unobtrusive") %></td>
+
+      <%= if include_challenge_activities?(@leaderboard) do %>
+        <td class="has-text-centered"><%= entry.activity_count %></td>
+      <% end %>
+
+      <td class="has-text-centered"><strong><%= challenge_leaderboard_entry_value(@conn, @leaderboard, entry, @stages) %></strong></td>
+
+      <%= if show_goal do %>
+        <%= render("goal_progress.html",
+              leaderboard: @leaderboard,
+              entry: entry,
+              stages: @stages,
+              challenge: @challenge,
+              conn: @conn) %>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

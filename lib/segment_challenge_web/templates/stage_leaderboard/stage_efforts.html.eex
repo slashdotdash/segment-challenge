@@ -1,0 +1,106 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th class="has-text-centered">Date</th>
+      <th class="has-text-centered">Activity</th>
+      <th class="has-text-centered">Distance</th>
+
+      <%= if is_ride_stage?(@stage) do %>
+        <th class="has-text-centered">Speed</th>
+        <th class="has-text-centered"><abbr title="Heart rate">HR</abbr></th>
+        <th class="has-text-centered">Power</th>
+      <% end %>
+
+      <%= if is_run_stage?(@stage) do %>
+        <th class="has-text-centered">Pace</th>
+        <th class="has-text-centered"><abbr title="Heart rate">HR</abbr></th>
+      <% end %>
+
+      <%= if is_activity_stage?(@stage) do %>
+        <th class="has-text-centered">Duration</th>
+        <th class="has-text-centered">Elevation</th>
+      <% else %>
+        <th class="has-text-centered">Elevation</th>
+        <th class="has-text-centered">Time</th>
+      <% end %>
+
+      <%= if flag_stage_efforts?(@conn, @stage, @challenge) do %>
+        <th />
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <%= for stage_effort <- @stage_efforts do %>
+    <tr class="<%= stage_effort_class(stage_effort, entry: @entry, stage: @stage) %>">
+      <td class="has-text-centered">
+        <%= stage_effort.start_date_local |> format_date("%b %d, %Y") |> link(to: strava_activity_url(stage_effort.strava_activity_id, stage_effort.strava_segment_effort_id), target: "_blank") %>
+
+        <%= if stage_effort.flagged do %>
+          <i class="fa fa-exclamation-triangle pull-right" aria-hidden="true" title="Stage effort flagged. <%= stage_effort.flagged_reason %>"></i>
+        <% end %>
+      </td>
+
+      <td class="has-text-centered">
+        <%= activity_description(stage_effort.activity_type) %>
+      </td>
+
+      <td class="has-text-centered">
+        <%= display_distance(@conn, @leaderboard, stage_effort.distance_in_metres) %>
+      </td>
+
+      <%= if is_ride_stage?(@stage) do %>
+        <td class="has-text-centered">
+          <%= display_speed(@conn, stage_effort) %>
+        </td>
+
+        <td class="has-text-centered">
+          <%= if stage_effort.average_heartrate do %>
+            <%= stage_effort.average_heartrate %><small>bpm</small>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+
+        <td class="has-text-centered">
+          <%= if stage_effort.average_watts do %>
+            <%= stage_effort.average_watts %><abbr title="Watts">W</abbr>
+            <%= if stage_effort.device_watts do %><i class="fa fa-bolt"></i><% end %>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+      <% end %>
+
+      <%= if is_run_stage?(@stage) do %>
+        <td class="has-text-centered">
+          <%= display_pace(@conn, stage_effort) %>
+        </td>
+
+        <td class="has-text-centered">
+          <%= if stage_effort.average_heartrate do %>
+            <%= stage_effort.average_heartrate %><small>bpm</small>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+      <% end %>
+
+      <%= if is_activity_stage?(@stage) do %>
+        <td class="has-text-centered"><%= display_moving_time(@leaderboard, stage_effort.moving_time_in_seconds) %></td>
+        <td class="has-text-centered"><%= display_elevation(@conn, @leaderboard, stage_effort.elevation_gain_in_metres) %></td>
+      <% else %>
+        <td class="has-text-centered"><%= display_elevation(@conn, @leaderboard, stage_effort.elevation_gain_in_metres) %></td>
+        <td class="has-text-centered"><strong><%= elapsed_time(stage_effort.elapsed_time_in_seconds) %><strong></td>
+      <% end %>
+
+      <%= if flag_stage_efforts?(@conn, @stage, @challenge) do %>
+        <td class="has-text-centered">
+          <%= unless stage_effort.flagged do %>
+            <%= render "actions.html", entry: stage_effort, redirect_to: @leaderboard_path.(stage_effort.athlete_uuid), stage: @stage, challenge: @challenge, conn: @conn %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

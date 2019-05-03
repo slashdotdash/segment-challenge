@@ -1,0 +1,15 @@
+<%= if @commands[@stage.stage_number][:reveal_stage] do %>
+  <br />
+
+  <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+    <input name="challenge_uuid" type="hidden" value="<%= @stage.challenge_uuid %>">
+    <input name="stage_uuid" type="hidden" value="<%= @stage.stage_uuid %>">
+    <input name="command" type="hidden" value="RevealStage">
+    <input name="redirect_to" type="hidden" value="<%= challenge_stage_path(@conn, :show, @challenge.url_slug) %>">
+
+    <p class="control">
+      <%= submit "Reveal stage",
+            class: "button is-primary is-outlined" %>
+    </p>
+  <% end %>
+<% end %>

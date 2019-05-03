@@ -1,0 +1,45 @@
+<div class="columns">
+  <div class="column is-1 has-text-centered">
+    <h1 class="title is-4">Stage <%= @stage.stage_number %></h1>
+    <span class="tag"><%= @stage.stage_type %></span>
+  </div>
+
+  <div class="column">
+    <h1 class="title">
+      <%= link @stage.name, to: stage_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>
+    </h1>
+
+    <h2 class="subtitle">
+      <i class="fa fa-calendar-o"></i>
+      <%= @stage.start_date_local |> format_date %> &mdash; <%= @stage.end_date_local |> format_date %>
+    </h2>
+
+    <%= if @stage.status == "active" do %>
+      <div class="tags has-addons">
+        <span class="tag is-primary">current</span>
+        <span class="tag is-light">stage</span>
+      </div>
+    <% end %>
+
+    <%= if @stage.status == "past" do %>
+      <div class="tags has-addons">
+        <span class="tag is-dark">past</span>
+        <span class="tag is-light">stage</span>
+      </div>
+    <% end %>
+
+    <div class="content is-medium">
+      <%= if @stage.status == "past" do %>
+        <%= unless blank?(@stage.results_html) do %>
+          <%= raw(@stage.results_html) %>
+        <% end %>
+      <% else %>
+        <%= if @stage.description_html do %>
+          <%= raw(@stage.description_html) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<hr />

@@ -1,0 +1,15 @@
+<%= for chunk <- Enum.chunk_every(@challenges, 3, 3, [nil, nil, nil]) do %>
+  <div class="columns">
+    <%= for challenge <- chunk do %>
+      <div class="column<%= if challenge do %> is-bordered<% end %>">
+        <%= if challenge do %>
+          <%= render "challenge.html", challenge: challenge, conn: @conn %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= if @challenges.total_pages > 1 do %>
+  <%= challenge_pagination_links(@conn, @challenges) %>
+<% end %>

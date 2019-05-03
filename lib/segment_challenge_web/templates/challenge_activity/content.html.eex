@@ -1,0 +1,1 @@
+<%= render SegmentChallengeWeb.ActivityView, "activity_feed.html", activities: @activities, self: @challenge.challenge_uuid, paginate: true, conn: @conn %>

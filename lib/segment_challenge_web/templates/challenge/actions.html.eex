@@ -1,0 +1,48 @@
+<%= if @commands[:rename_challenge] ||  @commands[:set_challenge_description] || @commands[:cancel_challenge] || @commands[:publish_challenge_results] do %>
+<div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    <button class="button" aria-haspopup="true" aria-controls="challenge-menu">
+      <span class="icon is-small">
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="challenge-menu" role="menu">
+    <div class="dropdown-content">
+      <%= if @challenge.status == "pending" do %>
+        <a href="<%= challenge_path(@conn, :host, @challenge.url_slug) %>" class="dropdown-item">Host your challenge</a>
+      <% end %>
+
+      <%= if @challenge.status == "active" do %>
+        <a href="#" class="dropdown-item modal-button" data-modal="share-challenge">Share challenge</a>
+
+        <hr class="dropdown-divider" />
+      <% end %>
+
+      <%= if @commands[:rename_challenge] do %>
+        <a href="#" class="dropdown-item modal-button" data-modal="rename-challenge">Rename challenge</a>
+      <% end %>
+
+      <%= if @commands[:set_challenge_description] do %>
+        <a href="<%= challenge_path(@conn, :edit, @challenge.url_slug) %>" class="dropdown-item">Edit description</a>
+      <% end %>
+
+      <%= unless @challenge.stages_configured do %>
+        <hr class="dropdown-divider" />
+
+        <a href="<%= stage_path(@conn, :new, @challenge.url_slug) %>" class="dropdown-item">Add a stage</a>
+      <% end %>
+
+      <%= if @commands[:publish_challenge_results] do %>
+        <a href="<%= challenge_result_path(@conn, :publish, @challenge.url_slug) %>" class="dropdown-item">Publish challenge results</a>
+      <% end %>
+
+      <%= if @commands[:cancel_challenge] do %>
+        <hr class="dropdown-divider" />
+
+        <a href="#" class="dropdown-item modal-button" data-modal="cancel-challenge">Cancel challenge</a>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

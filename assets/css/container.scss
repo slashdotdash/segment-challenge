@@ -1,0 +1,15 @@
+section {
+  .container {
+    a {
+      color: $blue;
+    }
+
+    a:hover {
+      color: $blue;
+    }
+
+    a:active {
+      color: $orange
+    }
+  }
+}

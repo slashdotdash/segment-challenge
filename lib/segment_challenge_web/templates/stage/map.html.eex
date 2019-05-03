@@ -1,0 +1,15 @@
+<div id="map"></div>
+
+<hr />
+
+<div class="columns">
+  <div class="column">
+    <h3 class="title"><i class="fa fa-flag-o"></i> Start</h3>
+    <%= @stage.start_description_html |> raw %>
+  </div>
+
+  <div class="column">
+    <h3 class="title"><i class="fa fa-flag-checkered"></i> Finish</h3>
+    <%= @stage.end_description_html |> raw %>
+  </div>
+</div>

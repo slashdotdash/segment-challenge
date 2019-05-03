@@ -1,0 +1,62 @@
+.radio input { margin: 0.5em; }
+.radio + .radio { margin-left: 0.75em; }
+.checkbox input { margin: 0.5em; }
+.checkbox + .checkbox { margin-left: 0.75em; }
+.field ul li { margin: 1em 0; }
+
+.is-select-list {
+  label.checkbox {
+    width: 25%;
+    margin-left: 0;
+  }
+}
+
+.is-radio-list {
+  label.radio {
+    width: 25%;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 1407px) {
+  .is-select-list {
+    label.checkbox {
+      width: 33%;
+    }
+  }
+
+  .is-radio-list {
+    label.radio {
+      width: 33%;
+      margin-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .is-select-list {
+    label.checkbox {
+      width: 50%;
+    }
+  }
+
+  .is-radio-list {
+    label.radio {
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .is-select-list {
+    label.checkbox {
+      width: 33%;
+    }
+  }
+
+  .is-radio-list {
+    label.radio {
+      width: 33%;
+    }
+  }
+}

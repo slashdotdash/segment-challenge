@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="container">
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img class="is-avatar" src="<%= current_athlete_profile(@conn) %>">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <h1 class="title"><%= current_athlete_name(@conn) %></h1>
+          <p class="subtitle is-5"><%= current_athlete_location(@conn) %></p>
+        </div>
+      </div>
+    </article>
+
+    <div class="tabs is-centered">
+      <ul>
+        <li class="<%= active_dashboard_section_class(@conn, :overview) %>">
+          <a href="<%= dashboard_path(@conn, :index) %>">
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="<%= active_dashboard_section_class(@conn, :trophy_case) %>">
+          <a href="<%= trophy_path(@conn, :index) %>">
+            <span>Trophy case</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <%= render_existing view_module(@conn), @template, assigns %>
+  </div>
+</section>

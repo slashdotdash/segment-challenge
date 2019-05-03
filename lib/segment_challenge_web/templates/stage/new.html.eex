@@ -1,0 +1,13 @@
+<section class="section">
+  <div class="container">
+    <%= render SegmentChallengeWeb.ChallengeView, "challenge_header.html",
+          challenge: @challenge,
+          hide_host_challenge: true,
+          hide_join_challenge: true,
+          commands: [],
+          conn: @conn
+    %>
+    
+    <div id="createStage"></div>
+  </div>
+</section>

@@ -1,0 +1,125 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Sorry, have we missed your attempt?</h2>
+
+    <div class="content is-medium">
+      <p>To compete in <strong><a href="<%= challenge_path(@conn, :show, @challenge.url_slug) %>"><%= @challenge.name %></a></strong> you must:</p>
+
+      <br />
+
+      <div class="steps">
+        <div class="step-item <%= if @is_authenticated do %>is-completed<% else %>is-active<% end %>">
+          <div class="step-marker">
+            <%= if @has_joined_club && @is_authenticated do %>
+              <i class="fa fa-check"></i>
+            <% end %>
+          </div>
+          <div class="step-content">
+            <p class="step-title"><a href="/auth">Connect Segment Challenge with Strava</a></p>
+            <p>To allow access to your Strava activity data.</p>
+          </div>
+        </div>
+
+        <%= if @challenge.restricted_to_club_members do %>
+          <div class="step-item <%= if @is_authenticated && @has_joined_club do %>is-completed<% else %><%= if @is_authenticated do %>is-active<% end %><% end %>">
+            <div class="step-marker">
+              <span class="icon">
+                <%= if @has_joined_club do %>
+                  <i class="fa fa-check"></i>
+                <% end %>
+              </span>
+            </div>
+            <div class="step-content">
+              <p class="step-title">Join <a href="<%= strava_club_url(@challenge.hosted_by_club_uuid) %>" target="_blank"><%= @challenge.hosted_by_club_name %></a> Strava club</p>
+              <p>Only club members can join this challenge.</p>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="step-item <%= if @is_authenticated && @has_joined_club && @has_joined_challenge do %>is-completed<% else %><%= if @is_authenticated && @has_joined_club do %>is-active<% end %><% end %>">
+          <div class="step-marker">
+            <%= if @has_joined_club && @is_authenticated && @has_joined_challenge do %>
+              <i class="fa fa-check"></i>
+            <% end %>
+          </div>
+          <div class="step-content">
+            <p class="step-title"><a href="<%= challenge_path(@conn, :join, @challenge.url_slug) %>">Join the challenge</a></p>
+            <p>Join the challenge to compete.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <h5 class="title">Challenge restrictions</h5>
+
+      <%= unless @challenge.challenge_type == "segment" do %>
+        <%= if Enum.any?(@challenge.included_activity_types) do %>
+          <p>
+            Only <strong><%= Enum.join(@challenge.included_activity_types, ", ") %></strong>
+            activities are allowed for this challenge.
+
+            <%= display_excluded_activities(@challenge) %>
+          </p>
+        <% end %>
+      <% end %>
+
+      <%= unless @challenge.allow_private_activities do %>
+        <p>
+          Activity privacy settings must be marked <strong>Everyone</strong> to count
+          towards the challenge.
+        </p>
+      <% end %>
+
+      <hr />
+
+      <%= if @has_joined_club && @is_authenticated && @has_joined_challenge && @has_set_gender do %>
+        <p>
+          Great, <em>you're all set to go.</em>
+        </p>
+
+        <p>
+          Your attempt should appear shortly after you upload your activity to Strava.
+          If you've recently joined a challenge it may take a few hours before your attempts appear.
+        </p>
+
+        <p>Please <a href="mailto:ben@segmentchallenge.com">get in touch</a> if you still can't see your segment effort.</p>
+      <% else %>
+        <%= if @is_authenticated && @has_joined_challenge && @has_set_gender == false do %>
+          <div class="notification">
+            <p>Your gender is unset in your <a href="https://www.strava.com/settings/profile" target="_blank">Strava profile</a>.</p>
+            <p>
+              Segment Challenge uses your gender to list your attempts in the appropriate leaderboard for either Men or Women.
+            </p>
+
+            <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+              <input name="command" type="hidden" value="ConfigureAthleteGenderInStage">
+              <input name="stage_uuid" type="hidden" value="<%= @stage.stage_uuid %>">
+              <input name="redirect_to" type="hidden" value="<%= stage_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>">
+
+              <div class="field has-addons">
+                <div class="control">
+                  <div class="select">
+                    <select name="gender">
+                      <option>Select gender&hellip;</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="control">
+                  <%= submit "Confirm", class: "button is-primary" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <p>You need to complete the above steps before your stage attempts will appear on Segment Challenge.</p>
+
+        <p>Please <a href="mailto:ben@segmentchallenge.com">get in touch</a> if you still can't see your segment effort after completing these steps.</p>
+      <% end %>
+    </div>
+  </div>
+</section>

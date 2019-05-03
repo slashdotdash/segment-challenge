@@ -1,0 +1,48 @@
+<div class="leaderboards">
+  <%= if Enum.any?(@leaderboards) do %>
+    <div class="tabs is-medium is-boxed is-fullwidth">
+      <ul class="is-leaderboard">
+        <%= for leaderboard <- @leaderboards do %>
+        <li class="<%= if leaderboard == @selected_leaderboard do %> is-active <% end %> is-unselectable">
+          <a href="<%= stage_leaderboard_query_path(@conn, leaderboard, @challenge, @stage) %>" up-target=".leaderboards">
+            <p class="title is-5" style="padding-top: 1em; padding-bottom: 1em;"><%= leaderboard.gender |> display_gender %></p>
+          </a>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <%= if Enum.any?(@leaderboard_entries) do %>
+      <%= render_stage_leaderboard(@selected_leaderboard,
+            entries: @leaderboard_entries,
+            selected_athlete: @selected_athlete,
+            stage_efforts: @stage_efforts,
+            stage: @stage,
+            challenge: @challenge,
+            leaderboard_path: fn athlete_uuid ->
+              if athlete_uuid == @selected_athlete do
+                stage_leaderboard_query_path(@conn, @selected_leaderboard, @challenge, @stage)
+              else
+                stage_leaderboard_query_path(@conn, @selected_leaderboard, @challenge, @stage, athlete_uuid)
+              end
+            end,
+            conn: @conn) %>
+
+      <%= render SegmentChallengeWeb.SharedView, "javascript_toggle.html" %>
+    <% else %>
+      <div class="content is-medium has-text-centered is-vcentered">
+        <%= if is_past?(@stage) do %>
+          <p>No entries</p>
+        <% else %>
+          <p>No entries yet</p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= render "missing_attempt.html", challenge: @challenge, stage: @stage, conn: @conn %>
+  <% else %>
+    <div class="content is-medium has-text-centered is-vcentered">
+      <p>Leaderboards are available once the stage begins</p>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,9 @@
+<a class="button is-small" href="<%= @leaderboard_path.(@athlete_uuid) %>" title="View activities" up-target="table.leaderboard">
+  <span class="icon">
+    <%= if @selected_athlete == @athlete_uuid do %>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    <% else %>
+      <i class="fa fa-angle-down" aria-hidden="true"></i>
+    <% end %>
+  </span>
+</a>

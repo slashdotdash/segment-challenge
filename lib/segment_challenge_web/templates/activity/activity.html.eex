@@ -1,0 +1,36 @@
+<article class="media is-activity-feed">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <%= if has_actor_image?(@activity) do %>
+        <img class="is-avatar" src="<%= actor_image(@activity) %>">
+      <% else %>
+        <%= if @activity.actor_type == "challenge" || @activity.actor_type == "stage" do %>
+          <img src="<%= static_path(@conn, "/images/logo-large.png") %>" style="margin-top: 8px;" width="32" height="32" alt="<%= @activity.actor_name %>" title="<%= @activity.actor_name %>">
+        <% end %>
+      <% end %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <%= if @activity.actor_uuid != @self do %>
+          <strong>
+            <%= if is_current_athlete?(@conn, @activity.actor_uuid) do %>
+              You
+            <% else %>
+              <%= link_to_activity_actor(@conn, @activity) %>
+            <% end %>
+          </strong>
+
+          <br />
+        <% end %>
+
+        <%= render_activity_message(@conn, @activity) %>
+
+        <br />
+
+        <small><%= format_date_time(@activity.published) %></small>
+      </p>
+    </div>
+  </div>
+</article>

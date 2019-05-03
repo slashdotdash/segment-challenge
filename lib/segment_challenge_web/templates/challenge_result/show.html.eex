@@ -1,0 +1,13 @@
+<%= render SegmentChallengeWeb.ChallengeView, "challenge_layout.html",
+      template: @template,
+      challenge: @challenge,
+      stage: @stage,
+      stages: @stages,
+      leaderboards: @leaderboards,
+      selected_leaderboard: @selected_leaderboard,
+      leaderboard_entries: @leaderboard_entries,
+      selected_athlete: @selected_athlete,
+      stage_efforts: @stage_efforts,
+      commands: @commands,
+      conn: @conn
+%>

@@ -1,0 +1,29 @@
+<%= if length(@stages) == 1 do %>
+  <%= for stage <- @stages do %>
+    <%= if Map.has_key?(@entry.goal_progress, stage.stage_uuid) do %>
+      <% goal_progress = @entry.goal_progress |> Map.get(stage.stage_uuid) |> Decimal.new() %>
+      <td class="is-hidden-mobile"><%= progress_bar(goal_progress, 2) %></td>
+      <td class="thin has-text-centered"><%= Decimal.round(goal_progress) %>%</td>
+    <% else %>
+      <td colspan="2"></td>
+    <% end %>
+  <% end %>
+<% else %>
+  <td colspan="2" class="is-hidden-mobile" style="width: 30%;">
+    <div class="heatmap">
+      <%= for stage <- @stages do %>
+        <% width = Float.round(85 / length(@stages), 0) %>
+        <%= if Map.has_key?(@entry.goal_progress, stage.stage_uuid) do %>
+          <% goal_progress = @entry.goal_progress |> Map.get(stage.stage_uuid) |> Decimal.new() %>
+          <%= if progress_completed?(goal_progress) do %>
+            <div class="heatmap-cell heatmap-completed" style="width: <%= width %>%;" title="<%= stage.name %> (<%= Decimal.round(goal_progress) %>%)"> </div>
+          <% else %>
+            <div class="heatmap-cell" style="width: <%= width %>%; opacity: <%= goal_progress |> Decimal.div(Decimal.new(100)) |> Decimal.round(1) %>;" title="<%= stage.name %> (<%= Decimal.round(goal_progress) %>%)"> </div>
+          <% end %>
+        <% else %>
+          <div class="heatmap-cell heatmap-pending" style="width: <%= width %>%;" title="<%= stage.name %>"> </div>
+        <% end %>
+      <% end %>
+    </div>
+  </td>
+<% end %>

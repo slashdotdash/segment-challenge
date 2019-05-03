@@ -1,0 +1,71 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Host your challenge</h1>
+    <h2 class="subtitle">Make your challenge public</h2>
+
+    <%= if Enum.any?(@stages) do %>
+      <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+        <div class="columns">
+          <div class="column">
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" checked disabled>
+                  Please host <strong><%= @challenge.name %></strong> for club <strong><%= @challenge.hosted_by_club_name %></strong>.
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <div class="control">
+                <input name="challenge_uuid" type="hidden" value="<%= @challenge.challenge_uuid %>">
+                <input name="command" type="hidden" value="HostChallenge">
+                <input name="redirect_to" type="hidden" value="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">
+
+                <%= submit "Host challenge", class: "button is-primary" %>
+                <a class="button is-link" href="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">Cancel</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <hr />
+
+      <%= render "challenge_header.html",
+            challenge: @challenge,
+            hide_host_challenge: true,
+            hide_join_challenge: true,
+            commands: [],
+            conn: @conn
+      %>
+
+      <hr />
+
+      <%= for stage <- @stages do %>
+        <%= render SegmentChallengeWeb.ChallengeStageView, "stage.html", stage: stage, challenge: @challenge, conn: @conn %>
+      <% end %>
+
+      <%= unless @challenge.stages_configured do %>
+        <p class="help">You may include additional stages after the challenge has started.</p>
+      <% end %>
+
+  <% else %>
+    <hr />
+
+    <%= render "challenge_header.html",
+          challenge: @challenge,
+          hide_host_challenge: true,
+          hide_join_challenge: true,
+          commands: [],
+          conn: @conn
+    %>
+
+    <div class="notification is-primary">
+      <h1 class="title is-4">Your challenge has no stages</h1>
+
+      <p>You must <a href="<%= stage_path(@conn, :new, @challenge.url_slug) %>">add at least one stage</a> before you can host your challenge.</p>
+    </div>
+  <% end %>
+</section>

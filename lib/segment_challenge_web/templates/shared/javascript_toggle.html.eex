@@ -1,0 +1,39 @@
+<script type="text/javascript">
+function apply(selector, callback) {
+  var elements = document.querySelectorAll(selector);
+  var len = elements.length;
+
+  for (var i = 0; i < len; ++i) {
+    callback(elements[i])
+  }
+}
+
+function attr(element, name) {
+  return element.attributes[name].value
+}
+
+apply('a[data-toggle-target]', function(element) {
+  var target = attr(element, 'data-toggle-target')
+
+  element.addEventListener('click', function(event) {
+    apply('[data-toggle]', function(element) {
+      if (attr(element, 'data-toggle') == target) {
+        element.classList.add('is-active')
+      } else {
+        element.classList.remove('is-active')
+      }
+    })
+
+    apply('[data-toggle-container]', function(element) {
+      if (attr(element, 'data-toggle-container') == target) {
+        element.classList.remove('is-hidden')
+      } else {
+        element.classList.add('is-hidden')
+      }
+    })
+
+    event.preventDefault()
+    return false
+  })
+})
+</script>

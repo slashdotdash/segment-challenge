@@ -1,0 +1,7 @@
+<%= render SegmentChallengeWeb.DashboardView, "dashboard_layout.html",
+      template: "overview.html",
+      joined_challenges: @joined_challenges,
+      hosted_challenges: @hosted_challenges,
+      activities: @activities,
+      conn: @conn
+%>

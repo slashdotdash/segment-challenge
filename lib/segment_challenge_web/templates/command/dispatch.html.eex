@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Sorry, there was a problem with your request</h1>
+
+    <div class="content">
+      <p>The following validation errors were encountered:</p>
+
+      <ul>
+        <%= for {_error, _field, _type, message} <- @errors do %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <p><a href="<%= @redirect_to %>" onclick="window.history.back(); return false;">Go back and try again</a></p>
+  </div>
+</section>

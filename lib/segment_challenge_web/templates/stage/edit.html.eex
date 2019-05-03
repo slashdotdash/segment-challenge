@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="container">
+    <%= render "stage_header.html",
+          stage: @stage,
+          challenge: @challenge,
+          commands: [],
+          conn: @conn
+    %>
+
+    <hr />
+
+    <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+      <input name="challenge_uuid" type="hidden" value="<%= @challenge.challenge_uuid %>">
+      <input name="stage_uuid" type="hidden" value="<%= @stage.stage_uuid %>">
+      <input name="command" type="hidden" value="SetStageDescription">
+      <input name="redirect_to" type="hidden" value="<%= stage_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>">
+
+      <div id="stage_description_markdown"></div>
+
+      <hr />
+
+      <div class="field">
+        <div class="control">
+          <%= submit("Update description", class: "button is-primary") %>
+          <a href="<%= stage_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>" class="button is-link">Cancel</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

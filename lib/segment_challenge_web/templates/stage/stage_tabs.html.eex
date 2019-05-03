@@ -1,0 +1,33 @@
+<div class="tabs is-centered">
+  <ul>
+    <li class="<%= active_stage_section_class(@conn, :about) %>">
+      <a href="<%= stage_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>">
+        <span class="icon is-small"><i class="fa fa-map-marker"></i></span>
+        <span>Stage</span>
+      </a>
+    </li>
+
+    <li class="<%= active_stage_section_class(@conn, :activity) %>">
+      <a href="<%= stage_activity_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>">
+        <span class="icon is-small"><i class="fa fa-feed"></i></span>
+        <span>Activity</span>
+      </a>
+    </li>
+
+    <li class="<%= active_stage_section_class(@conn, :leaderboards) %>">
+      <a href="<%= stage_leaderboard_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>">
+        <span class="icon is-small"><i class="fa fa-list"></i></span>
+        <span>Leaderboards</span>
+      </a>
+    </li>
+
+    <%= if is_past?(@stage) && !is_race_stage?(@stage) do %>
+      <li class="<%= active_stage_section_class(@conn, :results) %>">
+        <a href="<%= stage_result_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>">
+          <span class="icon is-small"><i class="fa fa-trophy"></i></span>
+          <span>Results</span>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</div>

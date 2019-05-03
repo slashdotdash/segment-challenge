@@ -1,0 +1,14 @@
+Stage <%= @approve_leaderboards.stage_number %> <%= @approve_leaderboards.stage_name %> has finished
+
+You must now confirm the stage leaderboard places, and optionally provide a results summary:
+
+- View final stage <%= @approve_leaderboards.stage_number %> leaderboards: <%= stage_url(SegmentChallengeWeb.Endpoint, :show, @approve_leaderboards.stage_url_slug) %>
+
+Once approved, challenge leaderboards will be updated with the points accumulated from the stage.
+
+Stage results will be automatically approved three days after they finish.
+
+-- Segment Challenge
+
+
+Unsubscribe from notification emails to approve a stage: <%= email_notification_url(SegmentChallengeWeb.Endpoint, :index) %>

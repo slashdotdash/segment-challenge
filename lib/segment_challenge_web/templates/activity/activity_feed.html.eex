@@ -1,0 +1,17 @@
+<%= if Enum.any?(@activities) do %>
+  <div class="infinite-scroll">
+    <%= for activity <- @activities do %>
+      <%= render "activity.html", activity: activity, self: @self, conn: @conn %>
+    <% end %>
+
+    <%= if @paginate do %>
+      <p class="has-text-centered">
+        <%= activity_feed_next_page_link(@activities) %>
+      </p>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content is-medium has-text-centered is-vcentered">
+    <p>No activity yet</p>
+  </div>
+<% end %>

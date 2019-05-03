@@ -1,0 +1,50 @@
+.is-homepage {
+  @media screen and (min-width: 980px) {
+    background-image: url(../static/images/background-large.jpg);
+  }
+
+  @media screen and (max-width: 979px) {
+    background-image: url(../static/images/background-medium.jpg);
+  }
+
+  @media screen and (max-width: 768px) {
+    background-image: url(../static/images/background-small.jpg);
+  }
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #D3DFED;
+  background-size: cover;
+
+  .title {
+    color: $orange;
+  }
+
+  .heading {
+    a, a:visited, a:active, a:hover {
+      color: $orange;
+      text-decoration: none;
+      border-bottom: none;
+    }
+  }
+
+  .is-tagline {
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+  }
+
+  .tabs, .hero-foot {
+    a, a:visited, a:active {
+      color: $grey-dark;
+    }
+    a:hover {
+      color: $orange;
+    }
+  }
+
+  .container {
+    article {
+      margin-top: -30vh;
+    }
+  }
+}

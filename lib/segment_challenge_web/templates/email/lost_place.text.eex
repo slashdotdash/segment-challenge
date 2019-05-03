@@ -1,0 +1,14 @@
+<%= if @athlete do %>
+You just lost <%= pluralize(@current_rank - @previous_rank, "place", "places") %> on Stage <%= @stage.stage_number %> <%= @stage.name %> to <%= @athlete.firstname %> <%= @athlete.lastname %> by <%= @athlete.time_gap_in_seconds %>s.
+<% else %>
+You just lost <%= pluralize(@current_rank - @previous_rank, "place", "places") %> on Stage <%= @stage.stage_number %> <%= @stage.name %>.
+<% end %>
+
+You are now in <%= @current_rank |> Number.Human.number_to_ordinal() %> place.
+
+There are <%= @stage.end_date |> date_diff() %>  left to attempt the stage before it ends. So get out there, ride hard and try again.
+
+-- Segment Challenge
+
+
+Unsubscribe from notification emails when someone takes a stage place from you: <%= email_notification_url(SegmentChallengeWeb.Endpoint, :index) %>

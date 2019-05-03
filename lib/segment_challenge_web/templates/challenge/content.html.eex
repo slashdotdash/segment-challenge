@@ -1,0 +1,191 @@
+<%= if @challenge.status == "pending" do %>
+  <%= render "pending_challenge.html", challenge: @challenge, stages: @stages, conn: @conn %>
+<% end %>
+
+<%= if @challenge.status == "hosted" do %>
+  <div class="notification is-bold" style="margin-top: 1em;">
+    <div class="content">
+      <h3 class="title">Congratulations, your challenge is ready to start</h3>
+
+      <p>Once your challenge is approved it will appear on the site.</p>
+    </div>
+  </div>
+<% end %>
+
+<%= if @active_stage do %>
+  <section class="section">
+    <div class="container">
+      <nav class="level">
+        <%= unless hide_challenge_stages?(@challenge) do %>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Current Stage</p>
+              <p class="title">
+                <%= link @active_stage.name, to: stage_path(@conn, :show, @challenge.url_slug, @active_stage.url_slug) %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+
+        <%= if @active_stage.has_goal do %>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">
+                <%= if is_virtual_race?(@challenge) do %>
+                  Distance
+                <% else %>
+                  Goal
+                <% end %>
+              </p>
+              <p class="title"><%= display_goal(@active_stage.goal) %> <%= display_units(@active_stage.goal_units) %></p>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Time Remaining</p>
+            <p class="title"><%= time_remaining(@active_stage.end_date) %></p>
+          </div>
+        </div>
+
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Attempts</p>
+            <p class="title">
+              <%= @active_stage.attempt_count %>
+            </p>
+          </div>
+        </div>
+
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">By Competitors</p>
+            <p class="title">
+              <%= @active_stage.competitor_count %>
+            </p>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <hr />
+<% end %>
+
+<div class="columns">
+  <div class="column is-8">
+    <div class="content is-medium">
+      <%= @challenge.description_html |> raw %>
+    </div>
+  </div>
+
+  <div class="column is-4">
+    <div class="content is-small">
+      <%= if @challenge.has_goal do %>
+        <%= if is_virtual_race?(@challenge) do %>
+          <p>
+            This virtual race has a distance of <strong><%= display_goal(@challenge.goal) %> <%= display_units(@challenge.goal_units) %></strong>.
+            This distance must be completed in a single activity.
+          </p>
+
+          <p>
+            Your position in the leaderboard is based on your fastest time.
+          </p>
+
+          <p>To ensure you meet the race distance, we recommend you run a small amount over the race distance during your activity (about .5km / .3mi).
+            This will give you a buffer in the event your activity distance is <a href="https://support.strava.com/hc/en-us/articles/216919487-How-Distance-is-Calculated" target="_blank">shortened after upload to Strava</a> due to the cleanup of GPS irregularities.
+          </p>
+
+          <%= if is_best_effort_distance?(@challenge) do %>
+            <p>
+              Your fastest <%= display_goal(@challenge.goal) %> <%= display_units(@challenge.goal_units) %> time in an activity will be used if you run further than this distance.
+            </p>
+          <% end %>
+
+          <p>
+            Athletes who complete this challenge will receive a digital finisher's badge in their Trophy Case.
+          </p>
+        <% else %>
+          <h5 class="title">Challenge goal</h5>
+
+          <%= if @challenge.goal_recurrence == "none" do %>
+            <p>
+              This challenge has <%= if @challenge.accumulate_activities do %>a total activity<% else %>single activity<% end %> target of <%= display_goal(@challenge.goal) %>
+              <%= display_units(@challenge.goal_units) %>.
+            </p>
+
+            <p>
+              Athletes who complete this challenge by achieving the goal will
+              receive a digital finisher's badge in their Trophy Case.
+            </p>
+          <% else %>
+            <p>
+              This challenge has <%= if @challenge.accumulate_activities do %>a total activity<% else %>single activity<% end %> target of <%= display_goal(@challenge.goal) %>
+              <%= display_units(@challenge.goal_units) %> each <%= @challenge.goal_recurrence %>.
+            </p>
+
+            <p>
+              Athletes who complete this challenge by achieving the goal every
+              <%= @challenge.goal_recurrence %> will receive a digital finisher's badge
+              in their Trophy Case.
+            </p>
+          <% end %>
+        <% end %>
+
+        <hr />
+      <% end %>
+
+      <h5 class="title">Challenge information</h5>
+      <p>Activities included in the challenge are based on each athlete's local time zone.</p>
+
+      <%= unless @challenge.challenge_type == "segment" do %>
+        <%= if Enum.any?(@challenge.included_activity_types) do %>
+          <p>
+            Only <strong><%= Enum.join(@challenge.included_activity_types, ", ") %></strong>
+            activities are allowed for this challenge.
+
+            <%= display_excluded_activities(@challenge) %>
+          </p>
+        <% end %>
+      <% end %>
+
+      <%= unless @challenge.allow_private_activities do %>
+        <p>
+          Activity privacy settings must be marked <strong>Everyone</strong> to count
+          towards the challenge.
+        </p>
+      <% end %>
+
+      <p>
+        All activities logged during the challenge period must be uploaded to Strava
+        no later than three days after a stage ends.
+      </p>
+
+      <p>
+        <%= if @challenge.restricted_to_club_members do %>
+          This challenge is organised by <%= @challenge.hosted_by_club_name %> and <strong>only</strong> members may join.
+        <% else %>
+          This challenge is organised by <%= @challenge.hosted_by_club_name %> but <strong>anyone</strong> can join.
+        <% end %>
+      </p>
+
+      <%= if is_challenge_competitor?(@conn, @challenge) do %>
+        <hr />
+
+        <p>
+          You've joined this challenge.
+
+          <%= if @commands[:leave_challenge] do %>
+            <a href="#" class="modal-button" data-modal="leave-challenge">Leave challenge</a>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render "rename.html", challenge: @challenge, commands: @commands, conn: @conn %>
+<%= render "cancel.html", challenge: @challenge, commands: @commands, conn: @conn %>
+<%= render "action_leave_challenge.html", challenge: @challenge, commands: @commands, conn: @conn %>
+<%= render "action_share.html", challenge: @challenge, conn: @conn %>

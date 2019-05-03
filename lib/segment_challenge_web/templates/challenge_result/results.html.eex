@@ -1,0 +1,9 @@
+<%= if @challenge.results_html do %>
+  <div class="content is-medium">
+    <%= if @commands[:publish_challenge_results] do %>
+      <a class="button pull-right" href="<%= challenge_result_path(@conn, :publish, @challenge.url_slug) %>">Edit</a>
+    <% end %>
+
+    <%= raw(@challenge.results_html) %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<footer class="footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <p>
+          <a class="is-brand" href="/">
+            <img src="<%= static_path(@conn, "/images/logo-large.png") %>" width="30" height="21" alt="Segment Challenge" title="Segment Challenge">
+            <strong>Segment</strong> Challenge
+          </a>
+        </p>
+      </div>
+
+      <div class="column">
+        <p class="pull-right">
+          <a href="https://www.strava.com/">
+            <img src="<%= static_path(@conn, "/images/powered-by-strava-stacked-grey.png") %>" width="160" height="70" alt="Powered by Strava" title="Powered by Strava" style="margin-top: -2px; margin-left: -12px;">
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

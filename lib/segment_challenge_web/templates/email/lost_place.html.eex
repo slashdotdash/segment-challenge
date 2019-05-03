@@ -1,0 +1,52 @@
+<table style="width: 100% !important; border-collapse: collapse;">
+  <tbody>
+    <tr>
+      <td class="content" style="color: #4a4a4a; background-color: #fff; padding: 1em 2em;" bgcolor="#fff">
+        <%= if @athlete do %>
+          <h3 style="margin-bottom: 20px; line-height: 1.125; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 24px; color: #363636; font-weight: 300;">
+            <%= @athlete.firstname %> just stole your <%= @previous_rank |> Number.Human.number_to_ordinal() %> place
+          </h3>
+
+          <p style="font-size: 16px; font-weight: normal; margin-bottom: 20px;">
+            You just lost <%= pluralize(@current_rank - @previous_rank, "place", "places") %> on Stage <%= @stage.stage_number %> <a href="<%= stage_url(SegmentChallengeWeb.Endpoint, :show, @challenge.url_slug, @stage.url_slug, utm_source: "notifications", utm_medium: "email", utm_campaign: "lost_place") %>"><%= @stage.name %></a>
+            to <%= @athlete.firstname %> <%= @athlete.lastname %>
+            by <strong><%= @athlete.time_gap_in_seconds %>s</strong>.
+          </p>
+        <% else %>
+          <h3 style="margin-bottom: 20px; line-height: 1.125; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 24px; color: #363636; font-weight: 300;">
+            Sorry, you've lost <%= @previous_rank |> Number.Human.number_to_ordinal() %> place
+          </h3>
+
+          <p style="font-size: 16px; font-weight: normal; margin-bottom: 20px;">
+            You just lost <%= pluralize(@current_rank - @previous_rank, "place", "places") %> on Stage <%= @stage.stage_number %> <a href="<%= stage_url(SegmentChallengeWeb.Endpoint, :show, @challenge.url_slug, @stage.url_slug, utm_source: "notifications", utm_medium: "email", utm_campaign: "lost_place") %>"><%= @stage.name %></a>.
+          </p>
+        <% end %>
+
+        <p style="font-size: 16px; font-weight: normal; margin-bottom: 20px;">
+          You are now in <%= @current_rank |> Number.Human.number_to_ordinal() %> place.
+        </p>
+
+        <p style="font-size: 16px; font-weight: normal; margin-bottom: 20px;">
+          There are <strong><%= @stage.end_date |> date_diff() %> left</strong> to attempt the stage before it ends. So get out there, ride hard and try again.
+        </p>
+
+        <p style="font-size: 1em; font-weight: normal; margin-bottom: 20px;">
+          <em>&mdash; Segment Challenge</em>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="footer" align="center" style="padding-top: 1em; padding-bottom: 1em; color: #7a7a7a; background-image: none;">
+        <p class="has-text-centered" style="text-align: center; font-size: 14px; font-weight: normal; margin-bottom: 0; margin-top: 1em; color: #888;" align="center">
+          You received this message because you are a member of Segment Challenge.
+        </p>
+
+        <p class="has-text-centered" style="text-align: center; font-size: 14px; font-weight: normal; margin-bottom: 0; margin-top: 1em; color: #888;" align="center">
+          <a href="" style="color: #7a7a7a; text-decoration: underline;">
+            <%= link "Unsubscribe from notification emails when someone takes a stage place from you", to: email_notification_url(SegmentChallengeWeb.Endpoint, :index) %>
+          </a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>

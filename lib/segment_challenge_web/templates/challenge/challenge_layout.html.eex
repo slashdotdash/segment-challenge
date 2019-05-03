@@ -1,0 +1,58 @@
+<section class="section">
+  <div class="container">
+    <%= render "challenge_header.html", assigns %>
+
+    <%= if @commands[:publish_challenge_results] && blank?(@challenge.results_html) do %>
+      <div class="notification">
+        <p>
+          <%= @challenge.name %> has ended. You can provide an optional summary of the challenge and
+          <a class="" href="<%= challenge_result_path(@conn, :publish, @challenge.url_slug) %>">publish the challenge results</a>.
+        </p>
+      </div>
+    <% end %>
+
+    <div class="tabs is-centered">
+      <ul>
+        <li class="<%= active_challenge_section_class(@conn, :about) %>">
+          <a href="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">
+            <span>About</span>
+          </a>
+        </li>
+
+        <li class="<%= active_challenge_section_class(@conn, :activity) %>">
+          <a href="<%= challenge_activity_path(@conn, :show, @challenge.url_slug) %>">
+            <span class="icon is-small"><i class="fa fa-feed"></i></span>
+            <span>Activity</span>
+          </a>
+        </li>
+
+        <%= unless hide_challenge_stages?(@challenge) do %>
+          <li class="<%= active_challenge_section_class(@conn, :stages) %>">
+            <a href="<%= challenge_stage_path(@conn, :show, @challenge.url_slug) %>">
+              <span class="icon is-small"><i class="fa fa-map-marker"></i></span>
+              <span>Stages</span>
+            </a>
+          </li>
+        <% end %>
+
+        <%= if is_past_challenge?(@challenge) do %>
+          <li class="<%= active_challenge_section_class(@conn, :results) %>">
+            <a href="<%= challenge_result_path(@conn, :show, @challenge.url_slug) %>">
+              <span class="icon is-small"><i class="fa fa-trophy"></i></span>
+              <span>Results</span>
+            </a>
+          </li>
+        <% else %>
+          <li class="<%= active_challenge_section_class(@conn, :leaderboards) %>">
+            <a href="<%= challenge_leaderboard_path(@conn, :show, @challenge.url_slug) %>">
+              <span class="icon is-small"><i class="fa fa-list"></i></span>
+              <span>Leaderboards</span>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <%= render_existing view_module(@conn), @template, assigns %>
+  </div>
+</section>

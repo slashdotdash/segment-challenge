@@ -1,0 +1,20 @@
+<div class="columns">
+  <div class="column is-1 has-text-centered">
+  </div>
+
+  <div class="column is-upcoming-stage">
+    <h1 class="title">
+      Stage <%= @stage.stage_number %>
+    </h1>
+    <h2 class="subtitle">
+      <i class="fa fa-calendar-o"></i>
+      <%= @stage.start_date_local |> format_date %> &mdash; <%= @stage.end_date_local |> format_date %>
+    </h2>
+
+    <div class="content is-medium">
+      <p>Starts in <%= @stage.start_date_local |> date_diff %>.</p>
+    </div>
+  </div>
+</div>
+
+<hr />

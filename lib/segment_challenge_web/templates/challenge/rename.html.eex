@@ -1,0 +1,27 @@
+<%= if @commands[:rename_challenge] do %>
+<div class="modal" id="rename-challenge">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+      <header class="modal-card-head">
+        <p class="modal-card-title">Rename your challenge</p>
+      </header>
+      <section class="modal-card-body">
+        <input name="challenge_uuid" type="hidden" value="<%= @challenge.challenge_uuid %>">
+        <input name="command" type="hidden" value="RenameChallenge">
+        <input name="redirect_to" type="hidden" value="<%= challenge_path(@conn, :hosted) %>">
+
+        <label class="label" for="approval_message">Challenge name</label>
+        <p class="control">
+          <input class="input" type="input" name="name" value="<%= @challenge.name %>" placeholder="<%= @challenge.name %>" />
+        </p>
+      </section>
+      <footer class="modal-card-foot">
+        <%= submit "Rename challenge", class: "button is-primary" %>
+        <a class="button modal-cancel">Cancel</a>
+      </footer>
+    <% end %>
+  </div>
+  <button class="modal-close"></button>
+</div>
+<% end %>

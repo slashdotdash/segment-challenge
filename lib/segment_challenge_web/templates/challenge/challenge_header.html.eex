@@ -1,0 +1,59 @@
+<div class="columns">
+  <div class="column is-10">
+    <article class="media">
+      <figure class="media-left structure-item" title="media-left">
+        <p class="image is-64x64">
+          <img src="<%= profile_path(@conn, :show, "club", @challenge.hosted_by_club_uuid) %>">
+        </p>
+      </figure>
+
+      <div class="media-content structure-item is-structure-right" title="media-content">
+        <h1 class="title is-unstyled-link">
+          <%= link(@challenge.name, to: challenge_path(@conn, :show, @challenge.url_slug)) %>&nbsp;
+          <%= render "actions.html", challenge: @challenge, commands: @commands, conn: @conn %>
+        </h1>
+
+        <h2 class="subtitle">
+          Hosted by <a href="<%= strava_club_url(@challenge.hosted_by_club_uuid) %>" target="_blank"><%= @challenge.hosted_by_club_name %></a>
+        </h2>
+
+        <p>
+          <i class="fa fa-calendar-o"></i>
+          <%= @challenge.start_date_local |> format_date %> &mdash; <%= @challenge.end_date_local |> format_date %>
+        </p>
+
+        <%= if @challenge.status == "upcoming" do %>
+          <p class="is-hidden-print" style="margin-top: 1em;">
+            <span class="tag is-medium">Starts in <%= @challenge.start_date_local |> date_diff %></span>
+          </p>
+        <% end %>
+      </div>
+    </article>
+  </div>
+
+  <%= if @challenge.status == "pending" do %>
+    <%= unless assigns[:hide_host_challenge] do %>
+      <div class="column">
+        <a class="button is-primary is-outlined is-medium" href="<%= challenge_path(@conn, :host, @challenge.url_slug) %>">
+          Host challenge
+        </a>
+      </div>
+    <% end %>
+  <% else %>
+    <%= unless assigns[:hide_join_challenge] do %>
+      <div class="column is-action">
+        <%= if is_challenge_competitor?(@conn, @challenge) do %>
+          <div class="has-ribbon is-hidden-touch">
+            <div class="ribbon is-light is-medium">
+              You've joined this challenge
+            </div>
+          </div>
+        <% else %>
+          <a class="button is-primary is-outlined is-medium" href="<%= challenge_path(@conn, :join, @challenge.url_slug) %>">
+            Join challenge
+          </a>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

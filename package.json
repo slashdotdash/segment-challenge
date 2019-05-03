@@ -1,0 +1,76 @@
+{
+  "name": "segment_challenge_web",
+  "version": "1.0.0",
+  "description": "Segment challenge",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "drmonty-leaflet-awesome-markers": "^2.0.2",
+    "flatpickr": "^4.5.2",
+    "jquery": "^3.1.1",
+    "jscroll": "^2.3.5",
+    "leaflet": "^1.0.2",
+    "polyline-encoded": "0.0.8",
+    "prop-types": "^15.6.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-flatpickr": "^3.7.1",
+    "react-markdown": "^4.0.3",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "6.5.3",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "bulma": "^0.5.1",
+    "bulma-divider": "0.0.1",
+    "bulma-pricingtable": "^0.2.0",
+    "bulma-ribbon": "0.0.1",
+    "bulma-steps": "0.0.2",
+    "chalk": "1.1.3",
+    "clean-webpack-plugin": "0.1.14",
+    "copy-webpack-plugin": "^4.0.0",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "font-awesome": "^4.7.0",
+    "html-webpack-plugin": "2.24.1",
+    "image-webpack-loader": "^3.0.0",
+    "json-loader": "^0.5.7",
+    "moment": "^2.22.2",
+    "node-libs-browser": "^1.0.0",
+    "node-sass": "^4.9.4",
+    "path-exists": "3.0.0",
+    "postcss-loader": "1.1.1",
+    "react-dev-utils": "0.3.0",
+    "react-scripts": "^2.0.2",
+    "sass-loader": "^4.0.2",
+    "strftime": "^0.10.0",
+    "style-loader": "^0.13.0",
+    "unpoly": "^0.60.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "1.16.2"
+  },
+  "scripts": {
+    "compile": "webpack -p",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slashdotdash/segment-challenge.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/slashdotdash/segment-challenge/issues"
+  },
+  "homepage": "https://github.com/slashdotdash/segment-challenge"
+}

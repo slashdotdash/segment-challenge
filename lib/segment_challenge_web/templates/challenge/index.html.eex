@@ -1,0 +1,97 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h1 class="title">Challenges</h1>
+        <h2 class="subtitle">Join a challenge, or <a href="<%= host_challenge_path(@conn, :index) %>">create your own</a></h2>
+      </div>
+
+      <div class="column">
+        <div class="tabs is-small is-toggle">
+          <ul>
+            <li class="is-light <%= active_filter_class(@conn, "type") %>">
+              <%= link_to_challenge_type(@conn, nil) do %>All challenges<% end %>
+            </li>
+            <li class="<%= active_filter_class(@conn, "type", "distance") %>">
+              <%= link_to_challenge_type(@conn, "distance") do %>
+                Distance
+              <% end %>
+            </li>
+            <li class="<%= active_filter_class(@conn, "type", "duration") %>">
+              <%= link_to_challenge_type(@conn, "duration") do %>
+                Duration
+              <% end %>
+            </li>
+            <li class="<%= active_filter_class(@conn, "type", "elevation") %>">
+              <%= link_to_challenge_type(@conn, "elevation") do %>
+                Elevation
+              <% end %>
+            </li>
+            <li class="<%= active_filter_class(@conn, "type", "segment") %>">
+              <%= link_to_challenge_type(@conn, "segment") do %>
+                Segment
+              <% end %>
+            </li>
+            <li class="<%= active_filter_class(@conn, "type", "race") %>">
+              <%= link_to_challenge_type(@conn, "race") do %>
+                Virtual race
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="tabs is-small is-toggle">
+          <ul>
+            <li class="is-light <%= active_filter_class(@conn, "activity") %>">
+              <%= link_to_challenge_activity(@conn, nil) do %>All activities<% end %>
+            </li>
+            <li class="<%= active_filter_class(@conn, "activity", "ride") %>">
+              <%= link_to_challenge_activity(@conn, "ride") do %>Ride<% end %>
+            </li>
+            <li class="<%= active_filter_class(@conn, "activity", "run") %>">
+              <%= link_to_challenge_activity(@conn, "run") do %>Run<% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs is-centered">
+      <ul>
+        <li class="<%= active_challenge_section_class(@conn, :active) %>">
+          <a href="<%= challenge_path(@conn, :index) %>">Active &amp; upcoming</a>
+        </li>
+
+        <li class="<%= active_challenge_section_class(@conn, :past) %>">
+          <a href="<%= challenge_path(@conn, :past) %>">Past</a>
+        </li>
+
+        <%= if @current_athlete do %>
+        <li class="<%= active_challenge_section_class(@conn, :clubs) %>">
+          <a href="<%= challenge_path(@conn, :clubs) %>">Your clubs</a>
+        </li>
+
+        <li class="<%= active_challenge_section_class(@conn, :competing) %>">
+          <a href="<%= challenge_path(@conn, :competing) %>">You joined</a>
+        </li>
+
+        <li class="<%= active_challenge_section_class(@conn, :hosted) %>">
+          <a href="<%= challenge_path(@conn, :hosted) %>">Hosted by you</a>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <%= if Enum.any?(@challenges) do %>
+      <div class="is-bordered">
+        <%= render "challenges.html", challenges: @challenges, conn: @conn %>
+      </div>
+    <% else %>
+      <div class="content is-medium has-text-centered is-vcentered">
+        <p>No challenges</p>
+      </div>
+    <% end %>
+  </div>
+</section>

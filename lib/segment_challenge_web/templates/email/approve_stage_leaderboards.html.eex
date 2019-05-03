@@ -1,0 +1,44 @@
+<table style="width: 100% !important; border-collapse: collapse;">
+  <tbody>
+    <tr>
+      <td class="content" style="color: #4a4a4a; background-color: #fff; padding: 1em 2em;" bgcolor="#fff">
+        <h3 style="margin-bottom: 20px; line-height: 1.125; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 24px; color: #363636; font-weight: 300;">
+          Stage <%= @approve_leaderboards.stage_number %> <%= @approve_leaderboards.stage_name %> has finished
+        </h3>
+
+        <p style="font-size: 16px; font-weight: normal; margin-bottom: 20px;">
+          You must now <strong>confirm the stage leaderboard places</strong>, and optionally provide a results summary:
+        </p>
+
+        <ul>
+          <li><a href="<%= stage_url(SegmentChallengeWeb.Endpoint, :show, @approve_leaderboards.stage_url_slug) %>">View final stage <%= @approve_leaderboards.stage_number %> leaderboards</a>.</li>
+        </ul>
+
+        <p style="font-size: 16px; font-weight: normal; margin-bottom: 20px;">
+          Once approved, challenge leaderboards will be updated with the points accumulated from the stage.
+        </p>
+
+        <p style="font-size: 14px; font-weight: normal; margin-bottom: 20px;">
+          <em>Stage results will be automatically approved three days after they finish.</em>
+        </p>
+
+        <p style="font-size: 1em; font-weight: normal; margin-bottom: 20px;">
+          <em>&mdash; Segment Challenge</em>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="footer" align="center" style="padding-top: 1em; padding-bottom: 1em; color: #7a7a7a; background-image: none;">
+        <p class="has-text-centered" style="text-align: center; font-size: 14px; font-weight: normal; margin-bottom: 0; margin-top: 1em; color: #888;" align="center">
+          You received this message because you are a member of Segment Challenge.
+        </p>
+
+        <p class="has-text-centered" style="text-align: center; font-size: 14px; font-weight: normal; margin-bottom: 0; margin-top: 1em; color: #888;" align="center">
+          <a href="" style="color: #7a7a7a; text-decoration: underline;">
+            <%= link "Unsubscribe from notification emails to approve a stage", to: email_notification_url(SegmentChallengeWeb.Endpoint, :index) %>
+          </a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>

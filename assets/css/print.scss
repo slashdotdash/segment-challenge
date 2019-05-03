@@ -1,0 +1,28 @@
+@media print {
+  .header,
+  .footer,
+  .tabs,
+  .is-hidden-print {
+    display: none;
+  }
+
+  nav {
+    &.level {
+      display: none;
+    }
+  }
+
+  #map {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .tabs + .content {
+    margin-top: 1em;
+    margin-bottom: 0;
+  }
+
+  #doorbell-button {
+    display: none !important;
+  }
+}

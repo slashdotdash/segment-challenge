@@ -1,0 +1,84 @@
+<%= if @stage.description_html && @stage.description_html != "" do %>
+  <div class="content is-medium">
+    <div class="">
+      <%= @stage.description_html |> raw %>
+    </div>
+  </div>
+<% end %>
+
+<hr />
+
+<nav class="level">
+  <%= if @stage.distance_in_metres do %>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Distance</p>
+      <p class="title"><%= Number.Delimit.number_to_delimited(@stage.distance_in_metres, precision: 0) %> metres</p>
+    </div>
+  </div>
+  <% end %>
+
+  <%= if @stage.average_grade do %>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Average grade</p>
+      <p class="title"><%= round(@stage.average_grade, 1) %> %</p>
+    </div>
+  </div>
+  <% end %>
+
+  <%= if @stage.maximum_grade do %>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Maximum grade</p>
+      <p class="title"><%= round(@stage.maximum_grade, 1) %> %</p>
+    </div>
+  </div>
+  <% end %>
+
+  <%= if @stage.has_goal do %>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">
+          <%= if is_race_stage?(@stage) do %>
+            Distance
+          <% else %>
+            Goal
+          <% end %>
+        </p>
+        <p class="title"><%= display_goal(@stage.goal) %> <%= display_units(@stage.goal_units) %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <%= if @stage.status == "active" do %>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Time remaining</p>
+        <p class="title"><%= time_remaining(@stage.end_date) %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Attempts</p>
+      <p class="title"><%= @stage.attempt_count %></p>
+    </div>
+  </div>
+
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">By Competitors</p>
+      <p class="title"><%= @stage.competitor_count %></p>
+    </div>
+  </div>
+</nav>
+
+<%= if @stage.map_polyline do %>
+  <hr />
+
+  <%= render "map.html", stage: @stage, conn: @conn %>
+<% end %>
+
+<%= render "delete.html", stage: @stage, challenge: @challenge, commands: @commands, conn: @conn %>

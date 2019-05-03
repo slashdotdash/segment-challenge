@@ -1,0 +1,49 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Email notifications</h1>
+    <h2 class="subtitle">Choose the notifications you want to receive by email</h1>
+
+    <%= if @email_notification do %>
+      <%= render "email_notifications.html", email_notification: @email_notification, conn: @conn %>
+    <% else %>
+      <div class="notification">
+        <p>Please provide your email address to subscribe to notifications.</p>
+      </div>
+
+      <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+        <input name="command" type="hidden" value="SubscribeAthleteToAllNotifications">
+        <input name="redirect_to" type="hidden" value="<%= email_notification_path(@conn, :index) %>">
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left has-icons-right">
+            <input name="email" class="input" type="email" placeholder="Email address" value="">
+            <span class="icon is-small is-left">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" name="consent" checked disabled>
+              I agree to allow Segment Challenge to contact me
+            </label>
+          </div>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-primary">Subscribe to notifications</button>
+          </div>
+          <div class="control">
+            <button class="button is-link">Cancel</button>
+          </div>
+        </div>
+
+        <p class="help">You can manage individual notification preferences after subscribing.</p>
+      <% end %>
+    <% end %>
+  </div>
+</section>

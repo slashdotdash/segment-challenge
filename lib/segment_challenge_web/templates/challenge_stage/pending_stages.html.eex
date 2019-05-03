@@ -1,0 +1,15 @@
+<%= if Enum.any?(@stages) do %>
+  <%= for stage <- @stages do %>
+    <%= if stage.visible do %>
+      <%= render "stage.html", stage: stage, challenge: @challenge, conn: @conn %>
+    <% else %>
+      <%= render "pending_stage.html", stage: stage, challenge: @challenge, commands: @commands, conn: @conn %>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="content is-medium">
+    <p>No stages have been created for this challenge.</p>
+  </div>
+<% end %>
+
+<%= render "add_stage.html", challenge: @challenge, conn: @conn %>

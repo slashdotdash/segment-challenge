@@ -1,0 +1,24 @@
+<div class="modal" id="share-challenge">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Share your challenge</p>
+    </header>
+    <section class="modal-card-body">
+      <label class="label" for="approval_message">Challenge link</label>
+      <p class="control">
+        <input class="input" type="input" name="name" value="<%= challenge_url(@conn, :show, @challenge.url_slug) %>" />
+      </p>
+
+      <br />
+
+      <p>
+        Copy and share the link above so participants can join your challenge.
+      </p>
+    </section>
+    <footer class="modal-card-foot">
+      <a class="button modal-cancel">Close</a>
+    </footer>
+  </div>
+  <button class="modal-close"></button>
+</div>

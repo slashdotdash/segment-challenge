@@ -1,0 +1,71 @@
+<div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    <button class="button" aria-haspopup="true" aria-controls="stage-leaderboard-menu">
+      <span class="icon is-small">
+        <i class="fa fa-flag" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="stage-leaderboard-menu" role="menu">
+    <div class="dropdown-content">
+      <div class="dropdown-item">
+        <h4 class="title is-5">Flag stage effort</h4>
+      </div>
+
+      <hr class="dropdown-divider" />
+
+      <div class="dropdown-item has-text-left">
+        <p>Please tell us why you are flagging this segment effort.</p>
+      </div>
+
+      <div class="dropdown-item has-text-left">
+        <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+          <input name="strava_activity_id" type="hidden" value="<%= @entry.strava_activity_id %>">
+          <input name="strava_segment_effort_id" type="hidden" value="<%= @entry.strava_segment_effort_id %>">
+          <input name="stage_uuid" type="hidden" value="<%= @stage.stage_uuid %>">
+          <input name="command" type="hidden" value="FlagStageEffort">
+          <input name="redirect_to" type="hidden" value="<%= @redirect_to %>">
+
+          <div class="field">
+            <div class="control">
+              <ul>
+                <li>
+                  <label class="radio">
+                    <input type="radio" name="reason" value="Activity was in a vehicle">
+                    Activity was in a vehicle
+                  </label>
+                </li>
+                <li>
+                  <label class="radio">
+                    <input type="radio" name="reason" value="Wrong activity type">
+                    Wrong activity type
+                  </label>
+                </li>
+                <li>
+                  <label class="radio">
+                    <input type="radio" name="reason" value="Bad GPS data">
+                    Bad GPS data
+                  </label>
+                </li>
+                <li>
+                  <label class="radio">
+                    <input type="radio" name="reason" value="Group ride">
+                    Group ride
+                  </label>
+                </li>
+                <li>
+                  <label class="radio">
+                    <input type="radio" name="reason" value="Other reason">
+                    Other reason
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <a href="" class="dropdown-item" data-submit="parent" data-confirm="Are you sure you want to flag and remove this stage effort?">Flag effort</a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

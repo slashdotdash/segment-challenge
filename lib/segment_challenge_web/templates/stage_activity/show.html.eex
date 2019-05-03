@@ -1,0 +1,8 @@
+<%= render SegmentChallengeWeb.StageView, "stage_layout.html",
+      template: "content.html",
+      stage: @stage,
+      challenge: @challenge,
+      activities: @activities,
+      commands: @commands,
+      conn: @conn
+%>

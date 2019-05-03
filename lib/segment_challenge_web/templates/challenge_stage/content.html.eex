@@ -1,0 +1,8 @@
+<%= if @challenge.status == "pending" do %>
+  <%= render "pending_stages.html", challenge: @challenge, stages: @stages, commands: @stage_commands, conn: @conn %>
+<% else %>
+  <%= render "stages.html", challenge: @challenge, stages: @stages, commands: @stage_commands, conn: @conn %>
+<% end %>
+
+<%= render SegmentChallengeWeb.ChallengeView, "rename.html", challenge: @challenge, commands: @commands, conn: @conn %>
+<%= render SegmentChallengeWeb.ChallengeView, "cancel.html", challenge: @challenge, commands: @commands, conn: @conn %>

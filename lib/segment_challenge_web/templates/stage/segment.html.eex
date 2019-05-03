@@ -1,0 +1,30 @@
+<div class="box is-selectable">
+  <div class="columns">
+    <div class="column">
+      <h3 class="title is-5"><%= @segment.name %></h3>
+      <h4 class="subtitle is-6"><%= @segment.city %>, <%= @segment.state %>, <%= @segment.country %></h4>
+    </div>
+    <div class="column">
+      <div class="content">
+
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <p class="heading">Distance</p>
+            <p class="title"><%= Number.Delimit.number_to_delimited(@segment.distance_in_metres, precision: 0) %> metres</p>
+          </div>
+          <div class="level-item has-text-centered">
+            <p class="heading">Average grade</p>
+            <p class="title"><%= round(@segment.average_grade, 1) %> %</p>
+          </div>
+          <div class="level-item has-text-centered">
+            <p class="heading">Maximum grade</p>
+            <p class="title"><%= round(@segment.maximum_grade, 1) %> %</p>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="column is-1 has-text-centered">
+      <input type="radio" name="strava_segment_id" value="<%= @segment.strava_segment_id %>" <%= if @segment.strava_segment_id == @create_stage.strava_segment_id do %> checked <% end %>>
+    </div>
+  </div>
+</div>

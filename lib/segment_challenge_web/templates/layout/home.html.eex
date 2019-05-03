@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Segment Challenge allows you to host your own Strava segment competition">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/font-awesome.min.css") %>">
+    <link rel="icon" href="<%= static_path(@conn, "/images/favicon-32x32.png") %>" type="image/png">
+
+    <title>Welcome to Segment Challenge</title>
+  </head>
+  <body>
+    <div class="is-viewport">
+      <%= render @view_module, @view_template, assigns %>
+    </div>
+
+    <%= render "footer.html", assigns %>
+  </body>
+</html>

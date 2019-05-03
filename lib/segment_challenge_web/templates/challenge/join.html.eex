@@ -1,0 +1,68 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Join challenge</h1>
+    <h2 class="subtitle">Confirm you want to join the following challenge</h2>
+
+    <hr />
+
+    <%= render "challenge_header.html",
+          challenge: @challenge,
+          hide_host_challenge: true,
+          hide_join_challenge: true,
+          commands: [],
+          conn: @conn
+    %>
+
+    <hr />
+
+    <%= if !@challenge.restricted_to_club_members || (@challenge.restricted_to_club_members && @is_club_member) do %>
+      <div class="content is-medium">
+        <ul>
+          <li>By joining this challenge you agree to abide by the hosting club's rules.</li>
+          <li>The rules of the road must be observed and the safety of yourselves and others is always the first priority.</li>
+          <li><em>Participation in this challenge is at your own risk.</em></li>
+        </ul>
+      </div>
+
+      <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" checked disabled class="is-large">
+              I agree and want to join <strong><%= @challenge.name %></strong> hosted by <strong><%= @challenge.hosted_by_club_name %></strong>.
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <input name="challenge_uuid" type="hidden" value="<%= @challenge.challenge_uuid %>">
+            <input name="command" type="hidden" value="JoinChallenge">
+            <input name="redirect_to" type="hidden" value="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">
+
+            <%= submit "Join challenge", class: "button is-primary" %>
+            <a class="button is-link" href="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">Cancel</a>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="content">
+        <div class="notification">
+          <h4 class="title">Sorry, you're not yet a member of <strong><%= @challenge.hosted_by_club_name %></strong></h4>
+
+          <p>You need to join <a href="<%= strava_club_url(@challenge.hosted_by_club_uuid) %>" target="_blank"><%= @challenge.hosted_by_club_name %></a> on Stava before you can compete in their challenge.
+
+          <p>
+            <a class="button is-primary" href="<%= strava_club_url(@challenge.hosted_by_club_uuid) %>">Join club on Strava</a>
+            <a class="button is-link" href="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">Cancel</a>
+          </p>
+        </div>
+
+        <p class="help">Once you've joined the club on Strava, you'll need to return to Segment Challenge to join this challenge.</p>
+        <%= link to: auth_path(@conn, :delete), method: :delete, class: "help" do %>
+          If you've already joined <%= @challenge.hosted_by_club_name |> String.trim() %>, please click to log out, then log in again.
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

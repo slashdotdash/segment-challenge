@@ -1,0 +1,55 @@
+<div class="columns">
+  <div class="column">
+    <%= if Enum.any?(@joined_challenges) || Enum.any?(@hosted_challenges) do %>
+      <h1 class="title">Joined challenges</h1>
+
+      <%= if Enum.any?(@joined_challenges) do %>
+        <%= render SegmentChallengeWeb.SharedView, "challenges.html", challenges: @joined_challenges, paginate: false, conn: @conn %>
+      <% else %>
+        <div class="content is-medium">
+          <p>You haven't joined a challenge yet.</p>
+          <p><a href="<%= challenge_path(@conn, :index) %>">Find a challenge to join</a></p>
+        </div>
+      <% end %>
+
+      <hr />
+
+      <h1 class="title">Hosted challenges</h1>
+
+      <%= if Enum.any?(@hosted_challenges) do %>
+        <%= render SegmentChallengeWeb.SharedView, "challenges.html", challenges: @hosted_challenges, paginate: false, conn: @conn %>
+      <% else %>
+        <div class="content is-medium">
+          <p>You haven't hosted a challenge yet.</p>
+          <p><a href="<%= host_challenge_path(@conn, :index) %>">Host your own challenge</a></p>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="content is-medium has-text-centered is-vcentered">
+        <h2 class="title">Your challenges</h2>
+
+        <p>You haven't yet joined or hosted a challenge</p>
+
+        <ul>
+          <li><a href="<%= challenge_path(@conn, :index) %>">Find a challenge to join</a></li>
+          <li><a href="<%= host_challenge_path(@conn, :index) %>">Host your own challenge</a></li>
+        </ul>
+      </div>
+
+    <% end %>
+  </div>
+
+  <div class="column">
+    <%= if Enum.any?(@activities) do %>
+      <h1 class="title">Your activity</h1>
+
+      <%= render SegmentChallengeWeb.ActivityView, "activity_feed.html", activities: @activities, self: @conn.assigns[:current_athlete], paginate: true, conn: @conn %>
+    <% else %>
+      <div class="content is-medium has-text-centered is-vcentered">
+        <h2 class="title">Your activity</h2>
+
+        No activity yet
+      </div>
+    <% end %>
+  </div>
+</div>

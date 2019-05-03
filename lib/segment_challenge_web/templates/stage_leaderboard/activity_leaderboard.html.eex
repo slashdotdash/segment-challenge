@@ -1,0 +1,78 @@
+<table class="table is-striped is-fullwidth leaderboard">
+  <thead>
+    <tr>
+      <th class="has-text-centered">Rank</th>
+      <th class="is-hidden-mobile" />
+      <th>Name</th>
+      <th class="has-text-centered" title="<%= distance_title(@conn, @leaderboard) %>">
+        <%= if @leaderboard.accumulate_activities do %>
+          Distance
+        <% else %>
+          Longest Distance
+        <% end %>
+      </th>
+      <th class="has-text-centered">Duration</th>
+      <th class="has-text-centered" title="<%= elevation_title(@conn, @leaderboard) %>">Elevation</th>
+      <%= if @leaderboard.has_goal do %>
+        <th class="has-text-centered is-hidden-mobile">Progress</th>
+        <th class="is-hidden-mobile" />
+        <th class="is-hidden-tablet">Progress</th>
+      <% end %>
+      <th class="has-text-centered" colspan="2">Activities</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for entry <- @entries do %>
+      <tr class="<%= current_athlete_class(@conn, entry) %>">
+        <td class="has-text-centered"><%= entry.rank %></td>
+
+        <td class="is-hidden-mobile is-athlete-profile">
+          <%= if entry.athlete_profile do %>
+            <figure class="image is-32x32">
+              <img class="is-avatar" src="<%= entry.athlete_profile %>">
+            </figure>
+          <% end %>
+        </td>
+
+        <td>
+          <%= athlete_name(entry) |> link(to: strava_athlete_url(entry.athlete_uuid), target: "_blank", class: "is-unobtrusive") %>
+
+          <%= if entry.athlete_point_scoring_limited do %>
+            <i class="fa fa-exclamation-triangle pull-right" aria-hidden="true" title="Competitor will not accumulate activity in challenge leaderboards. <%= entry.athlete_limit_reason %>"></i>
+          <% end %>
+        </td>
+
+        <td class="has-text-centered"><%= display_distance(@conn, @leaderboard, entry.distance_in_metres) %></td>
+
+        <td class="has-text-centered"><%= display_moving_time(@leaderboard, entry.moving_time_in_seconds) %></td>
+
+        <td class="has-text-centered"><%= display_elevation(@conn, @leaderboard, entry.elevation_gain_in_metres) %></td>
+
+        <%= if @leaderboard.has_goal do %>
+          <td class="is-hidden-mobile"><%= progress_bar(entry.goal_progress, 2) %></td>
+          <td class="thin has-text-centered">
+            <%= if Decimal.decimal?(entry.goal_progress) do %>
+              <%= Decimal.round(entry.goal_progress) %>%
+            <% end %>
+          </td>
+        <% end %>
+
+        <td class="has-text-right">
+          <%= entry.stage_effort_count %>
+        </td>
+
+        <td class="has-button">
+          <%= render "toggle_stage_efforts.html", Map.put(assigns, :athlete_uuid, entry.athlete_uuid) %>
+        </td>
+      </tr>
+
+      <%= if @selected_athlete == entry.athlete_uuid do %>
+        <tr>
+          <td colspan="10">
+            <%= render "stage_efforts.html", Map.put(assigns, :entry, entry) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,14 @@
+/_build
+/cover
+/deps
+erl_crash.dump
+*.ez
+
+/config/*.secret.exs
+/fixture/vcr_cassettes
+/node_modules
+/priv/static
+
+.DS_Store
+erl_crash.dump
+repl-temp-*

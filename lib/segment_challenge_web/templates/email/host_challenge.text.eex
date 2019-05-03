@@ -1,0 +1,16 @@
+Congratulations, you've created <%= @host_challenge.name %>
+
+Your challenge is almost ready to start.
+
+Please complete the following steps to finish creating your challenge:
+
+  - Add at least one stage: <%= challenge_stage_url(SegmentChallengeWeb.Endpoint, :show, @host_challenge.url_slug) %>
+
+  - Host your challenge: <%= challenge_url(SegmentChallengeWeb.Endpoint, :host, @host_challenge.url_slug) %>
+
+Once hosted, your challenge will be available to competitors.
+
+-- Segment Challenge
+
+
+Unsubscribe from notification emails when someone takes a stage place from you: <%= email_notification_url(SegmentChallengeWeb.Endpoint, :index) %>

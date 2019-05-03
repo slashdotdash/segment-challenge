@@ -1,0 +1,19 @@
+.heatmap {
+  .heatmap-cell {
+    float: left;
+    width: 30px;
+    min-width: 2px;
+    background-color: $grey-darker;
+    height: 25px;
+    padding: 0;
+    margin: 0 0 0 0;
+
+    &.heatmap-completed {
+      background-color: $primary;
+    }
+
+    &.heatmap-pending {
+      background-color: $grey-light;
+    }
+  }
+}

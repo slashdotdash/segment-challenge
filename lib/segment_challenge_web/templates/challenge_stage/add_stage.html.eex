@@ -1,0 +1,7 @@
+<%= if is_challenge_host?(@conn, @challenge) do %>
+  <%= unless @challenge.stages_configured do %>
+    <div class="has-text-centered">
+      <a class="button is-primary" href="<%= stage_path(@conn, :new, @challenge.url_slug) %>">Add stage</a>
+    </div>
+  <% end %>
+<% end %>

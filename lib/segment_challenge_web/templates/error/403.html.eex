@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/font-awesome.min.css") %>">
+    <link rel="icon" href="<%= static_path(@conn, "/images/favicon-32x32.png") %>" type="image/png">
+
+    <title>403 Forbidden</title>
+  </head>
+  <body>
+    <div class="is-viewport">
+      <section class="section">
+        <div class="container">
+          <h1 class="title">403 Forbidden</h1>
+          <h2 class="subtitle">Sorry, you must be authenticated with Strava to complete your request</h2>
+
+          <p>Return to <a href="/">Segment Challenge</a>.</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<%= if Enum.any?(@challenges) do %>
+  <%= for challenge <- @challenges do %>
+    <%= render "challenge.html", challenge: challenge, conn: @conn %>
+  <% end %>
+<% else %>
+  <div class="content is-medium">
+    <p>No challenges.</p>
+  </div>
+<% end %>

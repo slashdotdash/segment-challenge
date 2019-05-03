@@ -1,0 +1,102 @@
+<table class="table is-striped is-fullwidth leaderboard">
+  <thead>
+    <th class="has-text-centered">Rank</th>
+    <th class="is-hidden-mobile" />
+    <th>Name</th>
+    <th class="has-text-centered">Date</th>
+
+    <%= if is_ride_stage?(@stage) do %>
+      <th class="has-text-centered">Speed</th>
+      <th class="has-text-centered"><abbr title="Heart rate">HR</abbr></th>
+      <th class="has-text-centered">Power</th>
+    <% end %>
+
+    <%= if is_run_stage?(@stage) do %>
+      <th class="has-text-centered">Pace</th>
+      <th class="has-text-centered"><abbr title="Heart rate">HR</abbr></th>
+    <% end %>
+
+    <th class="has-text-centered">Time</th>
+    <th class="has-text-centered" colspan="2">Attempts</th>
+  </thead>
+  <tbody>
+    <%= for entry <- @entries do %>
+      <tr class="<%= current_athlete_class(@conn, entry) %>">
+        <td class="has-text-centered"><%= entry.rank %></td>
+        <td class="is-hidden-mobile is-athlete-profile">
+          <%= if entry.athlete_profile do %>
+            <figure class="image is-32x32">
+              <img class="is-avatar" src="<%= entry.athlete_profile %>">
+            </figure>
+          <% end %>
+        </td>
+        <td>
+          <%= athlete_name(entry) |> link(to: strava_athlete_url(entry.athlete_uuid), target: "_blank", class: "is-unobtrusive") %>
+
+          <%= if entry.athlete_point_scoring_limited do %>
+            <i class="fa fa-exclamation-triangle pull-right" aria-hidden="true" title="Competitor will not accumulate points in challenge leaderboards. <%= entry.athlete_limit_reason %>"></i>
+          <% end %>
+        </td>
+
+        <td class="has-text-centered">
+          <%= entry.start_date_local |> format_date("%b %d, %Y") |> link(to: strava_segment_effort_url(entry.strava_segment_effort_id), target: "_blank") %>
+        </td>
+
+        <%= if is_ride_stage?(@stage) do %>
+          <td class="has-text-centered">
+            <%= display_speed(@conn, entry) %>
+          </td>
+
+          <td class="has-text-centered">
+            <%= if entry.average_heartrate do %>
+              <%= entry.average_heartrate %><small>bpm</small>
+            <% else %>
+              &mdash;
+            <% end %>
+          </td>
+
+          <td class="has-text-centered">
+            <%= if entry.average_watts do %>
+              <%= entry.average_watts %><abbr title="Watts">W</abbr>
+              <%= if entry.device_watts do %><i class="fa fa-bolt"></i><% end %>
+            <% else %>
+              &mdash;
+            <% end %>
+          </td>
+        <% end %>
+
+        <%= if is_run_stage?(@stage) do %>
+          <td class="has-text-centered">
+            <%= display_pace(@conn, entry) %>
+          </td>
+
+          <td class="has-text-centered">
+            <%= if entry.average_heartrate do %>
+              <%= entry.average_heartrate %><small>bpm</small>
+            <% else %>
+              &mdash;
+            <% end %>
+          </td>
+        <% end %>
+
+        <td class="has-text-centered"><strong><%= elapsed_time(entry.elapsed_time_in_seconds) %><strong></td>
+
+        <td class="has-text-right">
+          <%= entry.stage_effort_count %>
+        </td>
+
+        <td class="has-button">
+          <%= render "toggle_stage_efforts.html", Map.put(assigns, :athlete_uuid, entry.athlete_uuid) %>
+        </td>
+      </tr>
+
+      <%= if @selected_athlete == entry.athlete_uuid do %>
+        <tr>
+          <td colspan="10">
+            <%= render "stage_efforts.html", Map.put(assigns, :entry, entry) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

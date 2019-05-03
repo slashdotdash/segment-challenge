@@ -1,0 +1,26 @@
+<%= if @commands[:delete_stage] || @commands[:set_stage_description] || @commands[:publish_stage_results] do %>
+<div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    <button class="button" aria-haspopup="true" aria-controls="challenge-menu">
+      <span class="icon is-small">
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="challenge-menu" role="menu">
+    <div class="dropdown-content">
+      <%= if @commands[:set_stage_description] do %>
+        <a href="<%= stage_path(@conn, :edit, @challenge.url_slug, @stage.url_slug) %>" class="dropdown-item">Edit description</a>
+      <% end %>
+
+      <%= if @commands[:delete_stage] do %>
+        <a href="#" class="dropdown-item modal-button" data-modal="delete-stage">Delete stage</a>
+      <% end %>
+
+      <%= if @commands[:publish_stage_results] do %>
+        <a href="<%= stage_result_path(@conn, :publish, @challenge.url_slug, @stage.url_slug) %>" class="dropdown-item">Publish stage results</a>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

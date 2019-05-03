@@ -1,0 +1,19 @@
+<%= if Enum.any?(@starred_segments) do %>
+  <div class="is-scrollable-content">
+    <%= for segment <- @starred_segments do %>
+      <%= render "segment.html", segment: segment, create_stage: @create_stage, conn: @conn %>
+    <% end %>
+  </div>
+
+  <%= if has_error?(:strava_segment_id, @errors) do %>
+    <p><span class="help is-danger">You must select a segment</span></p>
+  <% end %>
+
+<% else %>
+  <div class="notification is-warning">
+    <div class="content is-medium">
+      <p>You haven't starred any segments on Strava.</p>
+      <p>You <strong>must star</strong> the <a href="https://www.strava.com/athlete/segments/starred" target="_blank">Strava segment</a>, or create a new segment, to use as a stage.</p>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,94 @@
+<header class="header">
+  <nav class="navbar is-transparent has-shadow">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item is-brand" href="/">
+          <img src="<%= static_path(@conn, "/images/logo-large.png") %>" width="30" height="21" alt="Segment Challenge" title="Segment Challenge">
+          <strong>Segment</strong> Challenge
+        </a>
+
+        <%# Hamburger menu (on mobile) %>
+        <span class="navbar-burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+
+      <%# Right side navigation (mobile) %>
+      <div class="navbar-menu is-hidden-desktop">
+        <%= if @current_athlete do %>
+        <a class="navbar-item <%= active_section_class(@conn, :dashboard) %>" href="<%= dashboard_path(@conn, :index) %>">
+          Dashboard
+        </a>
+        <% end %>
+
+        <a class="navbar-item <%= active_section_class(@conn, :challenge) %>" href="<%= challenge_path(@conn, :index) %>">
+          Challenges
+        </a>
+
+        <a class="navbar-item <%= active_section_class(@conn, :host) %>" href="<%= host_challenge_path(@conn, :index) %>">
+          Host
+        </a>
+
+        <%= if @current_athlete do %>
+          <%= link "Trophy case", to: trophy_path(@conn, :index), class: "navbar-item" %>
+          <%= link "Settings", to: email_notification_path(@conn, :index), class: "navbar-item" %>
+
+          <hr style="margin: 0.5rem 0;" />
+
+          <%= link "Log out", to: auth_path(@conn, :delete), method: :delete, class: "navbar-item" %>
+        <% else %>
+          <span class="navbar-item is-login-button has-text-centered">
+            <a href="/auth"><img src="<%= static_path(@conn, "/images/connect-with-strava.png") %>" alt="Connect with Strava" title="Connect with Strava"></a>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="navbar-menu is-hidden-touch">
+        <div class="navbar-start">
+          <%= if @current_athlete do %>
+          <a class="navbar-item is-tab <%= active_section_class(@conn, :dashboard) %>" href="<%= dashboard_path(@conn, :index) %>">
+            Dashboard
+          </a>
+          <% end %>
+
+          <a class="navbar-item is-tab <%= active_section_class(@conn, :challenge) %>" href="<%= challenge_path(@conn, :index) %>">
+            Challenges
+          </a>
+
+          <a class="navbar-item is-tab <%= active_section_class(@conn, :host) %>" href="<%= host_challenge_path(@conn, :index) %>">
+            Host
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <%= if @current_athlete do %>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              <figure class="image is-24x24" style="margin-right: 10px;">
+                <img class="is-avatar" src="<%= profile_path(@conn, :show, "athlete", @conn.assigns[:current_athlete].athlete_uuid) %>" alt="">
+              </figure>
+
+              <%= @current_athlete.firstname %> <%= @current_athlete.lastname %>
+            </a>
+
+            <div class="navbar-dropdown is-right">
+              <%= link "Trophy case", to: trophy_path(@conn, :index), class: "navbar-item" %>
+              <%= link "Settings", to: email_notification_path(@conn, :index), class: "navbar-item" %>
+
+              <hr class="navbar-divider">
+              
+              <%= link "Log out", to: auth_path(@conn, :delete), method: :delete, class: "navbar-item" %>
+            </div>
+          </div>
+          <% else %>
+            <span class="navbar-item is-login-button">
+              <a href="/auth"><img src="<%= static_path(@conn, "/images/connect-with-strava.png") %>" alt="Connect with Strava" title="Connect with Strava"></a>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

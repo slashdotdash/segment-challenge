@@ -1,0 +1,29 @@
+<div class="card badge">
+  <div class="badge-image">
+    <figure class="image is-128x128" style="margin: 0 auto;">
+      <img src="<%= profile_path(@conn, :show, "club", @badge.hosted_by_club_uuid) %>" alt="<%= @badge.hosted_by_club_name %> club logo" title="Hosted by <%= @badge.hosted_by_club_name %>">
+    </figure>
+  </div>
+
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content has-text-centered">
+        <p class="title is-4"><a href="<%= redirect_path(@conn, :challenge, @badge.challenge_uuid) %>"><%= @badge.challenge_name %></a></p>
+        <p class="subtitle is-5">by <%= @badge.hosted_by_club_name %></p>
+
+        <div class="is-separated">
+          <p><%= @badge.goal %> <%= display_units(@badge.goal_units) %> <%= goal_recurrence(@badge.goal_recurrence) %></p>
+        </div>
+
+        <p class="has-text-centered">
+          <span class="icon is-small">
+            <i class="fa fa-calendar-o"></i>
+          </span>
+          <small>
+            <%= @badge.challenge_start_date_local |> format_date %> &mdash; <%= @badge.challenge_end_date_local |> format_date %>
+          </small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

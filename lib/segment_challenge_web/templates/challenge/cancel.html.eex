@@ -1,0 +1,26 @@
+<%= if @commands[:cancel_challenge] do %>
+<div class="modal" id="cancel-challenge">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+      <header class="modal-card-head">
+        <p class="modal-card-title">Cancel your challenge</p>
+      </header>
+      <section class="modal-card-body">
+        <p>Are you sure you want to cancel your challenge?</p>
+        <br />
+        <p><em>This cannot be undone.</em></p>
+
+        <input name="challenge_uuid" type="hidden" value="<%= @challenge.challenge_uuid %>">
+        <input name="command" type="hidden" value="CancelChallenge">
+        <input name="redirect_to" type="hidden" value="<%= challenge_path(@conn, :hosted) %>">
+      </section>
+      <footer class="modal-card-foot">
+        <%= submit "Cancel challenge", class: "button is-primary" %>
+        <a class="button modal-cancel">Don't cancel</a>
+      </footer>
+    <% end %>
+  </div>
+  <button class="modal-close"></button>
+</div>
+<% end %>

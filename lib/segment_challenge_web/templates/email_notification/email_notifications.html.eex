@@ -1,0 +1,53 @@
+<aside class="menu">
+  <p class="menu-label">
+    Stage emails
+  </p>
+  <ul class="menu-list">
+    <li>
+      <div class="columns">
+        <div class="column" style="font-size: 16px; margin-top: 5px;">
+          When someone takes a stage place from you
+        </div>
+        <div class="column has-text-centered">
+          <%= form_tag(api_command_path(@conn, :dispatch), method: :post) do %>
+            <input name="command" type="hidden" value="ToggleEmailNotification">
+            <input name="value" type="hidden" value="lost_place">
+
+            <label class="switch">
+              <input type="checkbox" <%= if @email_notification.lost_place_notification do %>checked="checked"<% end %>>
+              <div class="slider"></div>
+            </label>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  </ul>
+</aside>
+
+<hr />
+
+<aside class="menu">
+  <p class="menu-label">
+    Challenges hosted by you
+  </p>
+  <ul class="menu-list">
+    <li>
+      <div class="columns">
+        <div class="column" style="font-size: 16px; margin-top: 5px;">
+          Host a challenge
+        </div>
+        <div class="column has-text-centered">
+          <%= form_tag(api_command_path(@conn, :dispatch), method: :post) do %>
+            <input name="command" type="hidden" value="ToggleEmailNotification">
+            <input name="value" type="hidden" value="host_challenge">
+
+            <label class="switch">
+              <input type="checkbox" <%= if @email_notification.host_challenge_notification do %>checked="checked"<% end %>>
+              <div class="slider"></div>
+            </label>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  </ul>
+</aside>

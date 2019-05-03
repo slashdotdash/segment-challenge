@@ -1,0 +1,1 @@
+<%= render SegmentChallengeWeb.StageView, "stage_layout.html", Map.put(assigns, :template, "leaderboards.html") %>

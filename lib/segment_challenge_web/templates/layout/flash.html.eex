@@ -1,0 +1,9 @@
+<div class="notification is-info">
+  <button class="delete"></button>
+  <%= get_flash(@conn, :info) %>
+</div>
+
+<div class="notification is-danger">
+  <button class="delete"></button>
+  <%= get_flash(@conn, :error) %>
+</div>

@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="container">
+    <%= render SegmentChallengeWeb.StageView, "stage_header.html",
+          stage: @stage,
+          challenge: @challenge,
+          commands: [],
+          conn: @conn
+    %>
+
+    <hr />
+
+    <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+      <input name="stage_uuid" type="hidden" value="<%= @stage.stage_uuid %>">
+      <input name="published_by_club_uuid" type="hidden" value="<%= @challenge.hosted_by_club_uuid %>">
+      <input name="command" type="hidden" value="PublishStageResults">
+      <input name="redirect_to" type="hidden" value="<%= stage_result_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>">
+
+      <div id="stage-results-markdown"></div>
+
+      <hr />
+
+      <div class="field">
+        <div class="control">
+          <%= submit("Publish stage results", class: "button is-primary") %>
+          <a href="<%= stage_result_path(@conn, :show, @challenge.url_slug, @stage.url_slug) %>" class="button is-link">Cancel</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

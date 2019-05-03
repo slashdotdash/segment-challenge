@@ -1,0 +1,26 @@
+<article class="media">
+  <figure class="media-left structure-item" title="media-left">
+    <p class="image is-64x64">
+      <img src="<%= profile_path(@conn, :show, "club", @challenge.hosted_by_club_uuid) %>">
+    </p>
+  </figure>
+
+  <div class="media-content structure-item is-structure-right" title="media-content">
+    <h1 class="title">
+      <%= @stage.name %>
+      <%= render "actions.html", stage: @stage, challenge: @challenge, commands: @commands, conn: @conn %>
+    </h1>
+
+    <h2 class="subtitle">
+       Stage <%= @stage.stage_number %> · <%= @stage.stage_type %>
+      · <a href="<%= challenge_path(@conn, :show, @challenge.url_slug) %>"><%= @challenge.name %></a>
+    </h2>
+
+    <ul>
+      <li><i class="fa fa-calendar-o"></i> <%= @stage.start_date_local |> format_date %> &mdash; <%= @stage.end_date_local |> format_date %></li>
+      <%= if @stage.strava_segment_id do %>
+        <li class="is-hidden-print"><i class="fa fa-external-link"></i> <a href="<%= strava_segment_url(@stage.strava_segment_id) %>" target="_blank">View on Strava</a></li>
+      <% end %>
+    </ul>
+  </div>
+</article>

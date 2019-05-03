@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="<%= profile_path(@conn, :show, "club", @challenge.hosted_by_club_uuid) %>" alt="<%= @challenge.hosted_by_club_name %>" style="border-radius: 50%;">
+        </figure>
+      </div>
+
+      <div class="media-content">
+        <p class="title is-4"><%= link @challenge.name, to: challenge_path(@conn, :show, @challenge.url_slug) %></p>
+        <p class="subtitle is-6">Hosted by <%= @challenge.hosted_by_club_name %></p>
+      </div>
+    </div>
+
+    <div class="content">
+      <%= raw(@challenge.summary_html) %>
+
+      <div class="is-divider" data-content="<%= display_challenge_type(@challenge.challenge_type) %>"></div>
+
+      <p class="has-text-centered">
+        <small>
+          <span class="icon">
+            <i class="fa fa-calendar-o"></i>
+          </span>
+          <%= @challenge.start_date_local |> format_date %> &mdash; <%= @challenge.end_date_local |> format_date %>
+        </small>
+      </p>
+
+      <br />
+
+      <%= if is_challenge_competitor?(@conn, @challenge) do %>
+        <p class="has-text-centered">
+          <span class="tag is-medium">Joined challenge</span>
+        </p>
+      <% end %>
+
+      <%= if @challenge.status == "pending" do %>
+        <p class="has-text-centered">
+          <%= unless is_challenge_competitor?(@conn, @challenge) do %>
+            <a class="button is-primary" href="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">Host challenge</a>
+          <% end %>
+        </p>
+      <% end %>
+
+      <%= if @challenge.status == "upcoming" || @challenge.status == "active" do %>
+        <%= unless is_challenge_competitor?(@conn, @challenge) do %>
+          <p class="has-text-centered">
+            <a class="button is-primary" href="<%= challenge_path(@conn, :join, @challenge.url_slug) %>">Join challenge</a>
+          </p>
+        <% end %>
+      <% end %>
+
+      <%= if @challenge.status == "upcoming" do %>
+        <p class="has-text-centered help">Starts in <%= @challenge.start_date_local |> date_diff %></p>
+      <% end %>
+
+      <%= if @challenge.status == "active" do %>
+        <p class="has-text-centered help">Ends in <%= @challenge.end_date_local |> date_diff %></p>
+      <% end %>
+
+      <%= if @challenge.status == "past" do %>
+        <p class="has-text-centered help">Ended <%= @challenge.end_date_local |> date_diff %> ago</p>
+      <% end %>
+    </div>
+  </div>
+</div>

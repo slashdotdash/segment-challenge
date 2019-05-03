@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="<%= profile_path(@conn, :show, "club", @challenge.hosted_by_club_uuid) %>" alt="<%= @challenge.hosted_by_club_name %>">
+        </figure>
+      </div>
+
+      <div class="media-content">
+        <p class="title is-5">
+          <%= link @challenge.name, to: challenge_path(@conn, :show, @challenge.url_slug) %>
+
+          <%= if @challenge.status == "pending" do %>
+            <span class="tag">Pending</span>
+          <% end %>
+
+          <%= if @challenge.status == "hosted" do %>
+            <span class="tag">Pending approval</span>
+          <% end %>
+        </p>
+        <p class="subtitle is-6">Hosted by <%= @challenge.hosted_by_club_name %></p>
+
+        <%= if @challenge.status == "pending" do %>
+          <p>
+            <a class="button is-primary is-outlined" href="<%= challenge_path(@conn, :host, @challenge.url_slug) %>">Host your challenge</a>
+          </p>
+        <% end %>
+
+        <%= if @challenge.status == "upcoming" do %>
+          <p>Starts in <%= @challenge.start_date_local |> date_diff %></p>
+        <% end %>
+
+        <%= if @challenge.status == "active" do %>
+          <p>Ends in <%= @challenge.end_date_local |> date_diff %></p>
+        <% end %>
+
+        <%= if @challenge.status == "past" do %>
+          <p><i class="fa fa-calendar-o"></i> <%= @challenge.start_date_local |> format_date %> &mdash; <%= @challenge.end_date_local |> format_date %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
+@media screen and (max-width: 581px) {
+  a.is-brand {
+    font-size: 22px !important;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .container {
+    width: 900px !important;
+    max-width: 900px !important;
+  }
+}
+
+@media screen and (min-width: 581px) {
+  .container {
+    width: 580px !important;
+  }
+}
+
+@media screen and (max-width: 581px) {
+  .container {
+    width: 90% !important;
+  }
+}
+  </style>
+</head>
+<body style="font-size: 100%; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.65; width: 100% !important; height: 100%; background-color: #efefef; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; margin: 0; padding: 0;" bgcolor="#efefef">
+  <table class="body-wrap" style="font-size: 100%; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.65; width: 100% !important; height: 100%; background-color: #efefef; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; margin: 0; padding: 0;" bgcolor="#efefef">
+    <tbody>
+      <tr>
+        <td class="container" style="display: block !important; clear: both !important; max-width: 900px; margin: 0 auto;">
+          <table style="width: 100% !important; border-collapse: collapse;">
+            <tbody>
+              <tr>
+                <td align="center" class="masthead" style="color: white; padding: 1em 0;">
+                  <h1 style="line-height: 1.25; font-size: 32px; text-transform: uppercase; margin: 0 auto; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                    <a class="is-brand" href="https://segmentchallenge.com/" style="text-transform: uppercase; text-decoration: none; font-weight: 200; font-size: 24px; letter-spacing: 0px; color: #FC4C02;">
+                      <img src="https://segmentchallenge.com/images/logo-large.png" width="30" height="21" alt="Segment Challenge" title="Segment Challenge" style="max-width: 100%; display: inline; width: 24px; height: 17px; margin: 0 2px 0 auto;">
+                      <strong style="font-weight: bold; letter-spacing: -0.5px; color: #FC4C02; margin-right: 2px;">Segment</strong> <span style="font-weight: 200;">Challenge</span>
+                    </a>
+                  </h1>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="container" style="display: block !important; clear: both !important; max-width: 900px; margin: 0 auto;">
+          <%= render @view_module, @view_template, assigns %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

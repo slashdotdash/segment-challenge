@@ -1,0 +1,44 @@
+<section class="section">
+  <div class="container">
+    <%= render "challenge_header.html",
+          challenge: @challenge,
+          commands: [],
+          conn: @conn
+    %>
+
+    <hr />
+
+    <%= if @stages_approved? do %>
+      <div class="notification" style="margin-top: 1em;">
+        <h3 class="title">Challenge has finished</h3>
+        <h4 class="subtitle">Please provide a summary of the challenge and confirm the final leaderboard places</h4>
+
+        <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+          <input name="challenge_uuid" type="hidden" value="<%= @challenge.challenge_uuid %>">
+          <input name="approved_by_club_uuid" type="hidden" value="<%= @challenge.hosted_by_club_uuid %>">
+          <input name="command" type="hidden" value="ApproveChallengeLeaderboards">
+          <input name="redirect_to" type="hidden" value="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">
+
+          <div class="field">
+            <label class="label" for="approval_message">Challenge summary</label>
+            <div class="control">
+              <textarea class="textarea" type="text" name="approval_message" rows="5" placeholder="e.g. Congratulations to Ben for winning the competition ..."></textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= submit "Approve challenge", class: "button is-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="notification" style="margin-top: 1em;">
+        <h3 class="title is-4">Sorry, you cannot approve the challenge just yet</h3>
+
+        <p>You <strong>must</strong> <a href="<%= challenge_path(@conn, :show, @challenge.url_slug) %>">approve all stage leaderboards</a> before the challenge.</p>
+      </div>
+    <% end %>
+  </div>
+</section>

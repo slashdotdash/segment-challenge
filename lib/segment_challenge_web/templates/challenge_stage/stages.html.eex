@@ -1,0 +1,19 @@
+<%= if Enum.any?(@stages) do %>
+  <%= for stage <- @stages do %>
+    <%= if stage.visible do %>
+      <%= render "stage.html", stage: stage, challenge: @challenge, conn: @conn %>
+    <% else %>
+      <%= if is_challenge_host?(@conn, @challenge) do %>
+        <%= render "pending_stage.html", stage: stage, challenge: @challenge, commands: @commands, conn: @conn %>
+      <% else %>
+        <%= render "upcoming_stage.html", stage: stage, challenge: @challenge, conn: @conn %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="content is-medium">
+    <p>Stages for this challenge have not yet been announced.</p>
+  </div>
+<% end %>
+
+<%= render "add_stage.html", challenge: @challenge, conn: @conn %>

@@ -1,0 +1,5 @@
+<%= render SegmentChallengeWeb.DashboardView, "dashboard_layout.html",
+      template: "trophy_case.html",
+      badges: @badges,
+      conn: @conn
+%>

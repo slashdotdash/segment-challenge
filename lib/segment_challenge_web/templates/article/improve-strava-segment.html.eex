@@ -1,0 +1,388 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        How to improve your Strava segment efforts
+      </h1>
+      <h2 class="subtitle">
+        Enhance your chances of claiming that segment KOM/QOM by following these tips
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <article class="container is-article">
+    <div class="content is-medium">
+      <p>
+        You've been invited to join your club's friendly <a href="<%= challenge_path(@conn, :index) %>">Strava segment challenge</a>
+        only to discover the competition is fierce &ndash; and worse &ndash; a few of your club mates are faster than you.
+      </p>
+      <p>
+        Here are ten tips to help improve your attempts at any Strava segment.
+        You won't even need to spend any money to take advantage of most of these suggestions.
+      </p>
+
+      <ol>
+        <li><a href="#recce">Check out the Strava segment before your attempt</a></li>
+        <li><a href="#wind">Ride with the wind</a></li>
+        <li><a href="#timing">Ride at the <em>perfect time</em> for your body</a></li>
+        <li><a href="#position">Hone your bike position</a></li>
+        <li><a href="#weight">Lose some weight</a></li>
+        <li><a href="#train">Train, train, train &hellip;</a></li>
+        <li><a href="#strava-live-segments">Use <em>Strava Live Segments</em></a></li>
+        <li><a href="#buy">Buy yourself an upgrade</a></li>
+        <li><a href="#caffeine">Take a caffeine hit</a></li>
+        <li><a href="#mind">Take advantage of your hidden motor</a></li>
+      </ol>
+
+      <hr />
+
+      <h3 id="recce">Check out the Strava segment before your attempt</h3>
+
+      <p>
+        Instead of going full gas from the off, plan your attempt by first looking at the route and elevation.
+      </p>
+      <p>
+        Go out and ride the segment before attempting to set your best time.
+        Identify the exact locations where the segment starts and ends. This will allow you to begin with a flying start and finish with a sprint, if you still have the legs.
+        Take advantage of <a href="#strava-live-segments">Strava Live Segments</a> to provide this information in real-time as you ride.
+      </p>
+
+      <p>
+        A test ride through the segment will allow you to watch out for any hazards, such as potholes or gravel, and get a good feel for the effort required.
+      </p>
+
+      <h3 id="wind">Ride with the wind</h3>
+
+      <p>
+        It'll be significantly easier to conquer the segment with a tailwind.
+      </p>
+
+      <p>
+        So check the local weather forecast before you set out.
+        The forecast will indicate the wind direction. If it's pointing in the same general direction as the segment then you'll gain some free speed.
+      </p>
+
+      <h3 id="timing">Ride at the <em>perfect time</em> for your body</h3>
+
+      <p>
+        Research has consistently shown that cyclists perform better in the evenings.
+        Take advantage of this small, but significant, natural boost &ndash; irrespective of whether you're a morning person &ndash; and make your attempt in the late afternoon or early evening.
+      </p>
+
+      <blockquote>
+        <p>A study from the University of Basse-Normandie found that cyclists peaked at 5.30pm in terms of maximum power production, and that at this time performance was 7.6% higher than the average for the rest of the day. Similarly, for average power output, 6pm was the optimum time, when it was a massive 11.3% higher than the daily average.</p>
+        <footer>— <a href="http://www.bikeradar.com/road/gear/article/body-temperature-and-cycling-performance-20339/">Why your cycling performance is better in the afternoon: The effects of internal body temperature examined</a></footer>
+      </blockquote>
+
+      <blockquote>
+        <p>Participants performed a 1000-m TT at either 8 am or 6 pm, in randomized, repeated-measures, crossover design. The time to complete the time trial was lower in the evening than in the morning.</p>
+        <footer>— <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0109954">Effect of Time of Day on Performance, Hormonal and Metabolic Response during a 1000-M Cycling Time Trial</a></footer>
+      </blockquote>
+
+      <p>
+        You should also plan to make your attempt when you're feeling most <em>fresh</em>.
+        This will be at the beginning of the ride, after you've warmed up.
+        Ensure you've ridden far enough to adequately warm your legs before reaching the segment.
+        Consider timing your attempt after a rest day, off the bike.
+      </p>
+
+      <h3 id="position">Hone your bike position</h3>
+
+      <div class="columns">
+        <div class="column">
+          <p>
+            Aerodynamics is the most significant resistance force to be overcome when cycling on the flat.
+            As the gradient increases, gravity becomes the primary resistance. The steeper the hill, the more you work against gravity.
+          </p>
+
+          <p>
+            An adjustment to your position on the bike aimed at reducing your frontal area will help to minimise wind resistance.
+            Depending upon the segment you're targeting, this may have a significant impact on your effort.
+            You should be riding the segment on the drops, in an aero position with a flat back, to minimise effort lost to the wind.
+          </p>
+
+          <p>
+            A good bike fit can also be used to enhance your performance by making you more comfortable on the bike.
+            It will help to minimise injury too. You won't set a quick segment time if you cannot go out and <a href="#train">train</a> as often as you like due to injury.
+          </p>
+        </div>
+
+        <div class="column">
+          <figure class="image">
+            <a href="<%= static_path(@conn, "/images/strava/cycling-resistance-forces.jpg") %>">
+              <img src="<%= static_path(@conn, "/images/strava/cycling-resistance-forces.jpg") %>" alt="Primary resistance forces during cycling" title="Primary resistance forces during cycling">
+            </a>
+            <figcaption class="has-text-centered"><small>Primary resistance forces during cycling &ndash; <a href="http://alex-cycle.blogspot.co.uk/2013/02/the-sum-of-parts.html">Alex Simmons</a></small></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <h4>How much does your position affect your speed?</h4>
+
+      <div class="columns">
+        <div class="column">
+          <iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/rjlrjj-IC9I" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="column">
+          <p>
+            <a href="http://www.cyclingweekly.co.uk/">Cycling Weekly</a> and <a href="https://www.planetx.co.uk/">Planet X</a> took one of their standard road bikes and a rider to a wind tunnel
+            to test the affect of drag on various cycling positions.
+          </p>
+
+          <h5>Their findings:</h5>
+          <ul>
+            <li>Riding a standard <em>sportive position</em> &ndash; with straight arms &ndash; in a 47kph wind costs <strong>592 watts</strong>.</li>
+            <li>A more aero position saves <strong>171 watts</strong> &mdash; a 30% saving.</li>
+            <li>A bike fit to optimise position further saves another <strong>21 watts</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>
+        You can also choose to <a href="#buy">buy some aero kit</a> for yourself and your bike to gain further speed.
+      </p>
+
+
+      <h3 id="weight">Lose some weight</h3>
+
+      <p>
+        As shown in the chart above, once the gradient goes above 2% you spend most of your energy on the bike fighting against gravity.
+        To take advantage of this fact, on a steep segment losing weight will help improve your time.
+      </p>
+
+      <p>
+        The simplest approach is to dump any unnecessary gear: tools, spare inner tubes, pump, food, drink, your phone, and door key.
+        Leave them at home, or offload before the start of the segment and double back to collect once you've finished.
+        As an example, taking off two full bidons &ndash; weighing 1.5 kilos &ndash; and leaving at the bottom of the climb to collect as you descend later will help your time.
+      <p>
+
+      <p>
+        Over the longer term you can aim to lose any excess body weight to help your climbing prowess.
+        And there's always the option to <a href="#buy">buy yourself some lightweight upgrades</a>.
+      </p>
+
+      <h3 id="train">Training</h3>
+
+      <p>
+        There's no escaping the fact that cycling is a sport that demands dedication and consistent training to improve and retain fitness.
+      </p>
+
+      <p>
+        Repeated intervals on the segment will help to improve your time by training you to the exact demands required.
+        Unfortunately it will also be quite dull to ride up the same hill repeatedly.
+        Instead, going out for a group ride with your local cycling club will help improve your fitness.
+        You'll gain from the additional miles ridden, and motivation that comes from not wanting to be dropped when riding up hills.
+        The presence of other people on group rides not only provides a competitive element, but you also gain from the support of teammates and a distraction from physical pain or exhaustion.
+        Taking part in a chain gang &mdash; where you are constantly riding through and off at a high tempo &mdash; will help improve your cycle fitness.
+      </p>
+
+      <p>You don't need to dedicate a huge amount of training time to improve.
+        Instead, concentrate on optimising the riding you can fit into the time available.
+        This will be best achieved by creating a targeted training plan to follow. A coach will help to tailor a plan for your own desired goals.
+      </p>
+
+      <h4>Power-up your training</h4>
+      <p>
+        You may decide to <a href="#buy">buy yourself some speed</a> by investing in a power meter.
+        It won't make you immediately quicker, but an accurate indicator and log of your power output can help your training.
+        It provides unprecedented insight into your abilities and fitness. With the proper baseline data, you can use a power meter to determine your pacing strategy.
+      </p>
+
+      <p>
+        A power meter will allow you to ride at the dictated power level during power zone based training rides.
+        Analysing your power data, post-ride, will allow you to track fitness improvements.
+        Free tools such as <a href="https://www.wattsboard.com/">Wattsboard</a> take the power data from your Strava rides and
+        show your power profile trend and curve over time.
+        Observing the gains you make from your training rides will help motivate you further.
+      </p>
+      <p>
+        The real-time feedback of power output as you ride may even encourage you to <em>press the pedals harder</em> as you attempt the segment.
+      </p>
+
+      <h3 id="strava-live-segments">Strava Live Segments</h3>
+
+      <blockquote>
+        <p>Live Segments. Your segment performance in the moment, plus real-time comparisons to your PR and the current KOM or QOM.</p>
+        <p>Receive alerts when approaching one of your favorite Strava segments, then see a motivating visualization as you ride. You'll get instantaneous data — not just of your time in the moment, but also how it compares to your PR, your friends or the current KOM, QOM or CR. Results are calculated and displayed instantly when the segment ends.</p>
+        <footer>— <a href="https://www.strava.com/premium/live/segments">Strava Live Segments</a></footer>
+      </blockquote>
+
+      <div class="columns">
+        <div class="column">
+          <p>
+            Strava Live Segments are a premium Strava feature that provide real-time performance feedback, instantly displayed on your mobile or GPS device.
+            It's the virtual equivalent of riding a segment with a group of riders.
+            You can see your progress as you ride the segment &mdash; providing that additional motivation to improve your time.
+            I've found this is the most effective method of grabbing that elusive KOM/QOM.
+          </p>
+
+          <p>
+            You must <a href="https://www.strava.com/athlete/segments/starred">star the segment on Strava</a> to use Live Segments.
+            Then the segment will automatically appear as you approach when you're out riding.
+            A countdown distance to the start is shown and your time is tracked during the segment.
+          </p>
+          <p>
+            The device will show your current time versus your PR, the KOM/QOM record, or time of your closest friend.
+            You'll know as you ride whether you're ahead, or behind, the target time.
+          </p>
+
+          <p>
+            The Strava Live Segments feature is only available to <a href="https://www.strava.com/premium">Strava Premium</a> users.
+          </p>
+        </div>
+
+        <div class="column">
+          <figure class="has-text-centered">
+            <img src="<%= static_path(@conn, "/images/strava/strava-live-segments.jpg") %>" width="621" height="446" alt="Strava Live Segments" title="Strava Live Segments">
+            <figcaption><small>Strava Live Segments on Garmin Edge device</small></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <h4>Compatible devices</h4>
+
+      <p>You will need to own, or buy, one of the following GPS devices that support Strava Live Segments.</p>
+
+      <h5>Garmin devices:</h5>
+
+      <ul>
+        <li>Garmin Edge 510</li>
+        <li><a href="<%= redirect_path(@conn, :buy, "garmin-edge-520") %>" target="_blank">Garmin Edge 520</a></li>
+        <li><a href="<%= redirect_path(@conn, :buy, "garmin-edge-810") %>" target="_blank">Garmin Edge 810</a></li>
+        <li><a href="<%= redirect_path(@conn, :buy, "garmin-edge-820") %>" target="_blank">Garmin Edge 820</a></li>
+        <li><a href="<%= redirect_path(@conn, :buy, "garmin-edge-1000") %>" target="_blank">Garmin Edge 1000</a></li>
+        <li><a href="<%= redirect_path(@conn, :buy, "garmin-forerunner-735xt") %>" target="_blank">Garmin Forerunner 735XT</a></li>
+      </ul>
+
+      <h5>MIO Cyclo devices:</h5>
+
+      <ul>
+        <li>Cyclo 310</li>
+        <li>Cyclo 315 HC</li>
+        <li>Cyclo 315</li>
+        <li>Cyclo 500</li>
+        <li>Cyclo 505</li>
+        <li>Cyclo 505 HC</li>
+      </ul>
+
+      <h5>Wahoo devices:</h5>
+
+      <ul>
+        <li><a href="<%= redirect_path(@conn, :buy, "wahoo-elemnt") %>" target="_blank">Wahoo ELEMNT </a></li>
+      </ul>
+
+      <h3 id="buy">Buy yourself an upgrade</h3>
+
+      <p>
+        There are two main ways to buy yourself some speed: gear optimised for aerodynamics or saving weight.
+        Depending upon the segment you're attempting, aero gains typically contribute more to improving performance than weight saving.
+      </P>
+
+      <h4>Which aero kit gives the most bang for your buck?</h4>
+
+      <p>
+        Cycling Weekly took a rider, and a standard and aero road bike, to a wind tunnel to discover which <a href="http://www.cyclingweekly.co.uk/videos/cycling-tech/aero-kit-gives-bang-buck">aero kit is the most cost effective</a>.
+      </p>
+
+      <h5>Their findings:</h5>
+      <ul>
+        <li>An aero road helmet vs a standard non-aero vented helmet: saves 18 watts at a cost of £79.99 &mdash; <strong>£4.34 per watt</strong> saved.</li>
+        <li>Race skin suit vs a relaxed fit jersey and shorts: saves 32 watts at a cost of £79.99 &mdash; <strong>£2.53 per watt</strong> saved.</li>
+        <li>Aero overshoes vs no shoe covers: saves 18 watts at a cost of £14.99 &mdash; <strong>£0.81 per watt</strong> saved.</li>
+        <li>An aero race bike vs lightweight road bike: saves 7 watts at a cost of £2,499.99 &mdash; <strong>£379.84 per watt</strong> saved.</li>
+        <li>Deep aero wheels (55mm) vs semi-aero wheels (30mm): saved no watts</li>
+      </ul>
+
+      <p>Buying yourself some cheap overshoes, tight fitting skin suit and an aero helmet are the most cost effetive aero upgrades.</p>
+
+      <ul>
+        <li><a href="<%= redirect_path(@conn, :buy, "overshoes") %>" target="_blank">Overshoes</a> &mdash; such as the <a href="<%= redirect_path(@conn, :buy, "velotoze-tall-shoe-covers") %>" target="_blank">VeloToze</a></li>
+        <li><a href="<%= redirect_path(@conn, :buy, "road-helmets") %>" target="_blank">Aero road helmet</a> &mdash; like the <a href="<%= redirect_path(@conn, :buy, "kask-protone") %>" target="_blank">Kask Protone</a></li>
+        <li>An <a href="<%= redirect_path(@conn, :buy, "jersey-tops") %>" target="_blank">aero race jersey</a> &mdash; such as the <a href="<%= redirect_path(@conn, :buy, "sportful-speed-skin-jersey") %>" target="_blank">Sportful speed skin jersey</a></li>
+      </ul>
+
+      <h4>Power-based training</h4>
+
+      <p>
+        As discussed in the <a href="#train">training</a> section above, a <a href="<%= redirect_path(@conn, :buy, "power-training") %>" target="_blank">power meter</a> can be an invaluable training tool.
+        <a href="https://www.velopress.com/books/training-and-racing-with-a-power-meter/" target="_blank">Training and Racing with a Power Meter</a> by Hunter Allen and Andrew Coggan is the book that will help you interpret the data it provides.
+      </p>
+
+      <h4>Faster tyres</h4>
+
+      <p>
+        You can save watts by <a href="http://www.bicyclerollingresistance.com/road-bike-reviews" target="_blank">switching to a tyre with lower rolling resistance</a>.
+        The following examples are tyres with low rolling resistance, according to independent review.
+      </p>
+
+      <ul>
+        <li><a href="<%= redirect_path(@conn, :buy, "vittoria-corsa-speed") %>" target="_blank">Vittoria Corsa Speed</a> 23mm tubular tyre &mdash; rolling resistance of <a href="http://www.bicyclerollingresistance.com/road-bike-reviews/vittoria-corsa-speed-tubular-2017">9.9 watts at 100PSI</a>.</li>
+        <li><a href="<%= redirect_path(@conn, :buy, "continental-grand-prix-4000s-ii") %>" target="_blank">Continental Grand Prix 4000S II</a> 25mm clincher tyre &mdash; rolling resistance of <a href="http://www.bicyclerollingresistance.com/road-bike-reviews/continental-grand-prix-4000s-ii-2014">12.9 watts at 100PSI</a>.</li>
+        <li><a href="<%= redirect_path(@conn, :buy, "schwalbe-pro-one") %>" target="_blank">Schwalbe Pro One</a> 25mm tubeless clincher tyre &mdash; rolling resistance of <a href="http://www.bicyclerollingresistance.com/road-bike-reviews/schwalbe-one-vguard-clincher-2014">12.8 watts at 100PSI</a>.</li>
+      </ul>
+
+      <p>
+        Recent research has also shown that wider tyres have a lower rolling resistance, so consider upsizing to a 25mm or wider tyre.
+      </p>
+
+      <h3 id="caffeine">Take a caffeine hit</h3>
+
+      <p>
+        Dozens of studies have shown that consuming caffeine provides a benefit to your cycling performance.
+      </p>
+
+      <blockquote>
+        <p>A Spanish lab gave a group of amateurs a combo of caffeine and carbohydrate gel and has found they rode significantly better than others who had smaller doses or none at all. The big hit of caffeine gave them staying power.</p>
+        <footer>— <a href="http://www.cyclingweekly.co.uk/news/latest-news/drink-coffee-ride-faster-141011">Results are in: drink coffee, ride faster</a></footer>
+      </blockquote>
+
+      <p>
+        So drink a cup of coffee, or take a caffeine infused energy gel, around an hour before you attempt the segment.
+        Lighter riders will need about 35mg of caffeine, while larger riders may need up to 60mg.
+      </p>
+
+      <h3 id="mind">Take advantage of your hidden motor: your mind</h3>
+
+      <blockquote>
+        <p>What separates race winners from the nearly men? Top cyclists are physically similar, train the right way, eat the right things, and yet there is something that separates them.
+          It's their hidden engine &mdash; not a secret mechanical aid &mdash; but what’s between their ears that makes the difference.</p>
+        <footer>— <a href="http://www.bennionkearny.com/The-Hidden-Motor-The-Psychology-Of-Cycling-Book.htm">The Hidden Motor: The Psychology of Cycling</a></footer>
+      </blockquote>
+
+      <p>
+        Martijn Veltkamp, the book's author, provides insight into a significant factor to aid your cycling performance.
+        A near instant performance upgrade can be achieved by concentrating your mind.
+      </p>
+
+      <p>
+        One technique is to focus on your intrinsic motivation.
+        The internal reasons for being motivated: riding for the joy of it, or for the enjoyment of beating your time on a segment.
+        Keep this motivation in mind when you're out riding and suffering: use it to push yourself through.
+      </p>
+
+      <p>
+        Another example is harnessing your mind to conquer, or at least cope, with your fear of descending to help unlock performance.
+        A simple way to reduce a fear of descents is through distraction, which is known to reduce the emotional responses of your brain, including fear.
+      </p>
+
+      <p>
+        Finally, goal setting is an important technique to aid performance. Setting specific, attainable &mdash; yet challenging &mdash; goals benefits performance significantly.
+        Such goals act as a point of reference and give you a target to aim for.
+        You can use <a href="/">Segment Challenge</a> to help set your goals: attempt a different Strava segment each month.
+      </p>
+
+      <hr />
+
+      <h5>Host your own Strava Segment Challenge</h5>
+
+      <p class="help">
+        You can use this site to <a href="<%= host_challenge_path(@conn, :index) %>">host your own Strava competition</a>.
+        You choose the duration of your challenge and which Strava segments are included.
+        We take care of pulling in the right data from Strava for you.
+      </p>
+    </div>
+  </article>
+</section>

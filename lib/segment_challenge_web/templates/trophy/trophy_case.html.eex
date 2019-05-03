@@ -1,0 +1,25 @@
+<h1 class="title">Trophy case</h1>
+
+<%= if Enum.any?(@badges) do %>
+  <h2 class="subtitle">Join a challenge <a href="<%= challenge_path(@conn, :index) %>">to earn more badges</a></h2>
+
+  <div class="is-bordered">
+    <%= for chunk <- Enum.chunk_every(@badges, 4, 4, [nil, nil, nil, nil]) do %>
+      <div class="columns">
+        <%= for badge <- chunk do %>
+          <div class="column<%= if badge do %> is-bordered<% end %>">
+            <%= if badge do %>
+              <%= render "badge.html", badge: badge, conn: @conn %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content is-medium has-text-centered is-vcentered">
+    <p>None yet</p>
+
+    <p>Finish a <a href="<%= challenge_path(@conn, :index) %>">challenge</a> and your achievement will be shown here.</p>
+  </div>
+<% end %>

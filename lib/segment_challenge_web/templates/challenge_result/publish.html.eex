@@ -1,0 +1,28 @@
+<section class="section">
+  <div class="container">
+    <%= render(SegmentChallengeWeb.ChallengeView, "challenge_header.html",
+          challenge: @challenge,
+          commands: [],
+          conn: @conn) %>
+
+    <hr />
+
+    <%= form_tag(command_path(@conn, :dispatch), method: :post) do %>
+      <input name="challenge_uuid" type="hidden" value="<%= @challenge.challenge_uuid %>">
+      <input name="published_by_club_uuid" type="hidden" value="<%= @challenge.hosted_by_club_uuid %>">
+      <input name="command" type="hidden" value="PublishChallengeResults">
+      <input name="redirect_to" type="hidden" value="<%= challenge_result_path(@conn, :show, @challenge.url_slug) %>">
+
+      <div id="challenge-results-markdown"></div>
+
+      <hr />
+
+      <div class="field">
+        <div class="control">
+          <%= submit("Publish challenge results", class: "button is-primary") %>
+          <a href="<%= challenge_result_path(@conn, :show, @challenge.url_slug) %>" class="button is-link">Cancel</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+<%= if Enum.any?(@entries) do %>
+  <table class="table is-striped is-fullwidth">
+    <thead>
+      <th class="has-text-centered">Rank</th>
+      <%= unless @stage.stage_number == 1 do %>
+      <th class="has-text-centered"></th>
+      <% end %>
+      <th />
+      <th>Name</th>
+      <th class="has-text-centered"><%= display_rank_by(@stage_result.rank_by) %></th>
+      <th class="has-text-centered">Change</th>
+    </thead>
+    <tbody>
+      <%= for entry <- @entries do %>
+      <tr class="<%= current_athlete_class(@conn, entry) %>">
+        <td class="has-text-centered"><%= entry.rank %></td>
+        <%= unless @stage.stage_number == 1 do %>
+        <td class="has-text-centered">
+          <%= if is_nil(entry.rank_change) do %>
+            &ndash;
+          <% else %>
+            <%= if entry.rank_change > 0 do %>
+              <span class="has-gained-position">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i> <%= entry.rank_change %>
+              </span>
+            <% end %>
+
+            <%= if entry.rank_change < 0 do %>
+              <span class="has-lost-position">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i> <%= -entry.rank_change %>
+              </span>
+            <% end %>
+          <% end %>
+        </td>
+        <% end %>
+        <td style="padding: 10px 0;">
+          <%= if entry.athlete_profile do %>
+            <figure class="image is-32x32">
+              <img class="is-avatar" src="<%= entry.athlete_profile %>">
+            </figure>
+          <% end %>
+        </td>
+        <td><%= athlete_name(entry) |> link(to: strava_athlete_url(entry.athlete_uuid), target: "_blank", class: "is-unobtrusive") %></td>
+        <td class="has-text-centered"><%= display_rank_by_value(@conn, @stage_result.rank_by, entry) %></td>
+        <td class="has-text-centered"><%= display_rank_by_value_gain(@conn, @stage_result.rank_by, entry) %></tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="content is-medium has-text-centered is-vcentered">
+    <p>No entries</p>
+  </div>
+<% end %>

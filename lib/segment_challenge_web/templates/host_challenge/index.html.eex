@@ -1,0 +1,145 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">Host your own Strava challenge</h1>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <nav class="tabs is-boxed is-fullwidth">
+      <div class="container">
+        <ul>
+          <li data-toggle="segment-challenge" class="is-active">
+            <a data-toggle-target="segment-challenge">Segment challenge</a>
+          </li>
+          <li data-toggle="activity-challenge">
+            <a data-toggle-target="activity-challenge">Activity challenge</a>
+          </li>
+          <li data-toggle="virtual-race">
+            <a data-toggle-target="virtual-race">Virtual race</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section" data-toggle-container="segment-challenge">
+  <div class="container">
+    <div class="content is-medium">
+      <h3 class="title">Segment challenge</h3>
+
+      <p>
+        A segment challenge comprises one or more stages based around a <strong><span class="is-primary">Strava</span></strong> segment.
+      </p>
+
+      <p>
+        Segment efforts for each stage are automatically ranked by elapsed time and shown in a leaderboard.
+      </p>
+    </div>
+
+    <div class="pricing-table">
+      <div class="pricing-plan is-primary">
+        <div class="plan-header">Segment challenge</div>
+        <div class="plan-items">
+          <div class="plan-item">Athletes compete to set the fastest time over a Strava segment</div>
+          <div class="plan-item">An athlete may attempt the segment as many times as they like during the stage</div>
+          <div class="plan-item">Set the duration of your challenge and which Strava segments are included</div>
+          <div class="plan-item">
+            <p><strong>Examples</strong></p>
+            <ul>
+              <li>A year long challenge with twelve stages &ndash; a different stage each month</li>
+              <li>Single month challenge with a different stage each week</li>
+              <li>One day challenge containing a single stage</li>
+            </ul>
+          </div>
+        </div>
+        <div class="plan-footer">
+          <a href="<%= host_challenge_path(@conn, :new, "segment-challenge") %>" class="button is-fullwidth is-primary">Create segment challenge</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-hidden" data-toggle-container="activity-challenge">
+  <div class="container">
+    <div class="content is-medium">
+      <h3 class="title">Activity challenge</h3>
+
+      <p>
+        In activity challenges, all athletes' included activities are recorded during one or more stages.
+      </p>
+    </div>
+
+    <div class="pricing-table">
+      <div class="pricing-plan is-primary">
+        <div class="plan-header">Activity challenge</div>
+        <div class="plan-items">
+          <div class="plan-item">
+            Measure activity distance, duration, or elevation gain
+          </div>
+          <div class="plan-item">
+           Record total activity during the challenge period, or only the longest single activity
+         </div>
+          <div class="plan-item">
+            Set a goal to motivate competitors and reward them with a virtual badge on completion
+          </div>
+          <div class="plan-item">
+            <p><strong>Examples</strong></p>
+            <ul>
+              <li>November Cycling Distance Challenge</li>
+              <li>November Gran Fondo 100km Ride</li>
+              <li>Run One Mile Every Day for a Month</li>
+              <li>November Run Climbing Challenge</li>
+              <li>Climb 1,000ft in November</li>
+            </ul>
+          </div>
+        </div>
+        <div class="plan-footer">
+          <a href="<%= host_challenge_path(@conn, :new, "activity-challenge") %>" class="button is-fullwidth is-primary">Create activity challenge</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-hidden" data-toggle-container="virtual-race">
+  <div class="container">
+    <div class="content is-medium">
+      <h3 class="title">Virtual race</h3>
+
+      <p>It's like a real race, except competitors can record their attempt at any time or location.</p>
+    </div>
+
+    <div class="pricing-table">
+      <div class="pricing-plan is-primary">
+        <div class="plan-header">Virtual race</div>
+        <div class="plan-items">
+          <div class="plan-item">
+            Athletes compete to set the fastest time over a set distance
+          </div>
+          <div class="plan-item">
+            An athlete may record an attempt as many times as they like during the challenge period
+         </div>
+         <div class="plan-item">
+           You choose the race distance and how long competitors have to record a time for the challenge
+         </div>
+          <div class="plan-item">
+            <p><strong>Examples</strong></p>
+            <ul>
+              <li>Virtual 10K Race</li>
+              <li>November Virtual Marathon Run</li>
+              <li>November Virtual Cycling Century</li>
+            </ul>
+          </div>
+        </div>
+        <div class="plan-footer">
+          <a href="<%= host_challenge_path(@conn, :new, "virtual-race") %>" class="button is-fullwidth is-primary">Create virtual race</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render SegmentChallengeWeb.SharedView, "javascript_toggle.html" %>

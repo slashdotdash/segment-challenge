@@ -1,0 +1,34 @@
+<%= unless blank?(@stage.results_html) do %>
+  <div class="content is-medium">
+    <%= if @commands[:publish_stage_results] do %>
+      <a class="button pull-right" href="<%= stage_result_path(@conn, :publish, @challenge.url_slug, @stage.url_slug) %>">Edit</a>
+    <% end %>
+
+    <%= raw(@stage.results_html) %>
+  </div>
+<% end %>
+
+<div class="leaderboards">
+  <%= if Enum.any?(@stage_results) do %>
+    <div class="tabs is-medium is-boxed is-fullwidth">
+      <ul class="is-leaderboard">
+        <%= for stage_result <- @stage_results do %>
+        <li class="<%= if stage_result == @selected_stage_result do %> is-active <% end %> is-unselectable">
+          <a href="<%= stage_result_query_path(@conn, stage_result, @challenge, @stage) %>" title="<%= stage_result.description %>" up-target=".leaderboards">
+            <div>
+              <span class="title is-5"><%= stage_result.name %></span>
+              <span class="subtitle is-6"><%= stage_result.gender |> display_gender %></span>
+            </div>
+          </a>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <%= render "stage_result_entries.html", stage_result: @selected_stage_result, entries: @stage_result_entries, challenge: @challenge, stage: @stage, conn: @conn %>
+  <% else %>
+    <div class="content is-medium has-text-centered is-vcentered">
+      <p>Results are available after the stage has ended</p>
+    </div>
+  <% end %>
+</div>

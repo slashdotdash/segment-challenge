@@ -1,0 +1,262 @@
+<section class="hero is-homepage is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <article class="media is-branding">
+        <figure class="media-left">
+          <img src="<%= static_path(@conn, "/images/logo-large.png") %>" alt="Segment Challenge" title="Segment Challenge">
+        </figure>
+        <div class="media-content">
+          <div class="heading">
+            <h1 class="title">
+              <a href="<%= challenge_path(@conn, :index) %>">Segment</a>
+            </h1>
+            <h2 class="subtitle">
+              <a href="<%= challenge_path(@conn, :index) %>">Challenge</a>
+            </h2>
+          </div>
+        </div>
+      </article>
+
+      <h2 class="subtitle is-tagline">
+        Compete against your friends, teammates, or club members &mdash; host your own Strava challenge
+      </h2>
+
+      <nav class="tabs is-medium is-centered">
+        <div class="container">
+          <ul>
+            <%= if @current_athlete do %>
+              <li><a href="<%= dashboard_path(@conn, :index) %>">Dashboard</a></li>
+            <% end %>
+            <li><a href="<%= challenge_path(@conn, :index) %>">Challenges</a></li>
+            <li><a href="<%= host_challenge_path(@conn, :index) %>">Host</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <%= unless @current_athlete do %>
+        <p><a href="/auth"><img src="<%= static_path(@conn, "/images/connect-with-strava.png") %>" alt="Connect with Strava" title="Connect with Strava"></a></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <nav class="tabs is-centered">
+      <ul>
+        <li><a href="#about"><i class="fa fa-chevron-down is-large fa-2x" style="color: #fff;"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<section id="about" class="hero is-medium is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">Segment Challenge allows you to host &amp; compete in your own Strava challenges</h1>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <nav class="tabs is-boxed is-fullwidth">
+      <div class="container">
+        <ul>
+          <li data-toggle="segment-challenge" class="is-active">
+            <a data-toggle-target="segment-challenge">Segment challenge</a>
+          </li>
+          <li data-toggle="activity-challenge">
+            <a data-toggle-target="activity-challenge">Activity challenge</a>
+          </li>
+          <li data-toggle="virtual-race">
+            <a data-toggle-target="virtual-race">Virtual race</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div data-toggle-container="segment-challenge">
+        <h3 class="title">Segment challenge</h3>
+        <h4 class="subtitle">Compete over <strong><span class="is-primary">Strava</span></strong> segments</h4>
+
+        <div class="columns">
+          <div class="column">
+            <h1 class="title">Clubs</h1>
+            <h2 class="subtitle"><a href="<%= host_challenge_path(@conn, :new, "segment-challenge") %>">Host your own segment challenge</a></h2>
+
+            <div class="content is-medium">
+              <ol class="has-text-left">
+                <li>Choose the duration of your challenge (e.g. one week, a month, a year).</li>
+                <li>Select your favourite local Strava segments, one for each stage in your challenge.</li>
+                <li>Announce your challenge to your club members &amp; invite them to join.</li>
+                <li>Encourage your club's members to compete to set the fastest time on each stage.</li>
+              </ol>
+            </div>
+
+            <br />
+
+            <p class="hero-buttons">
+              <a class="button is-primary is-outlined is-medium" href="<%= host_challenge_path(@conn, :new, "segment-challenge") %>">Host a segment challenge</a>
+            </p>
+          </div>
+
+          <div class="is-divider-vertical is-hidden-mobile" data-content="OR"></div>
+          <div class="is-divider is-hidden-tablet" data-content="OR"></div>
+
+          <div class="column">
+            <h1 class="title">Athletes</h1>
+            <h2 class="subtitle"><a href="<%= challenge_path(@conn, :index) %>?type=segment">Find a segment challenge to compete in</a></h2>
+
+            <div class="content is-medium">
+              <ol class="has-text-left">
+                <li>Join the club hosting the challenge on <a href="https://www.strava.com" target="_blank">Strava</a>.</li>
+                <li>Once you've joined the club, you can join their challenges.</li>
+                <li>When the challenge starts it's time to head out and ride the selected Strava segment,
+                  you've got until the stage end date. <em>You can ride each stage as often as you like &mdash; only your fastest effort counts.</em>
+                </li>
+                <li>Accumulate points from your leaderboard position at the end of each stage towards the overall competition.</li>
+              </ol>
+            </div>
+
+            <br />
+
+            <p class="hero-buttons">
+              <a class="button is-primary is-outlined is-medium" href="<%= challenge_path(@conn, :index) %>">Find a challenge</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="is-hidden" data-toggle-container="activity-challenge">
+        <h3 class="title">Activity challenge</h3>
+        <h4 class="subtitle">Distance, duration, or elevation activities</h4>
+
+        <div class="columns">
+          <div class="column">
+            <h1 class="title">Clubs</h1>
+            <h2 class="subtitle"><a href="<%= host_challenge_path(@conn, :new, "activity-challenge") %>">Host your own activity challenge</a></h2>
+
+            <div class="content is-medium">
+              <ol class="has-text-left">
+                <li>Choose the duration of your challenge (e.g. one week, a month, a year).</li>
+                <li>Decide what type of activity to record &mdash; distance, elevation gain, or duration.</li>
+                <li>Announce your challenge to your club members &amp; invite them to join.</li>
+                <li>Encourage competitors to go out and ride or run.</li>
+              </ol>
+
+              <p>You can choose to set a minimum activity goal to reward competitors with a virtual badge on challenge completion.</p>
+            </div>
+
+            <br />
+
+            <p class="hero-buttons">
+              <a class="button is-primary is-outlined is-medium" href="<%= host_challenge_path(@conn, :new, "activity-challenge") %>">Host an activity challenge</a>
+            </p>
+          </div>
+
+          <div class="is-divider-vertical is-hidden-mobile" data-content="OR"></div>
+          <div class="is-divider is-hidden-tablet" data-content="OR"></div>
+
+          <div class="column">
+            <h1 class="title">Athletes</h1>
+            <h2 class="subtitle"><a href="<%= challenge_path(@conn, :index) %>">Find an activity challenge to compete in</a></h2>
+
+            <div class="content is-medium">
+              <ol class="has-text-left">
+                <li>Join the club hosting the challenge on <a href="https://www.strava.com" target="_blank">Strava</a>.</li>
+                <li>Once you've joined the club, you can join their challenges.</li>
+                <li>When the challenge starts it's time to head out and ride or run, you've got until the end date.</li>
+                <li>Included activities uploaded to Strava will count towards your overall position.</li>
+              </ol>
+
+              <p>You will be rewarded with a virtual badge on completion of the challenge if it has a goal.</p>
+            </div>
+
+            <br />
+            <br />
+
+            <p class="hero-buttons">
+              <a class="button is-primary is-outlined is-medium" href="<%= challenge_path(@conn, :index) %>">Find a challenge</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="is-hidden" data-toggle-container="virtual-race">
+        <h3 class="title">Virtual race</h3>
+        <h4 class="subtitle">Compete over a set distance wherever you are</h4>
+
+        <div class="columns">
+          <div class="column">
+            <h1 class="title">Clubs</h1>
+            <h2 class="subtitle"><a href="<%= host_challenge_path(@conn, :new, "virtual-race") %>">Host your own virtual race</a></h2>
+
+            <div class="content is-medium">
+              <ol class="has-text-left">
+                <li>Choose the duration of your challenge (e.g. one week, a month, a year).</li>
+                <li>Set your race distance (e.g. 10 km, 26.2 miles).</li>
+                <li>Announce your challenge to your club members &amp; invite them to join.</li>
+                <li>Encourage competitors to go out and ride or run.</li>
+              </ol>
+            </div>
+
+            <br />
+
+            <p class="hero-buttons">
+              <a class="button is-primary is-outlined is-medium" href="<%= host_challenge_path(@conn, :new, "virtual-race") %>">Host a virtual race</a>
+            </p>
+          </div>
+
+          <div class="is-divider-vertical is-hidden-mobile" data-content="OR"></div>
+          <div class="is-divider is-hidden-tablet" data-content="OR"></div>
+
+          <div class="column">
+            <h1 class="title">Athletes</h1>
+            <h2 class="subtitle"><a href="<%= challenge_path(@conn, :index) %>?type=race">Find a virtual race to compete in</a></h2>
+
+            <div class="content is-medium">
+              <ol class="has-text-left">
+                <li>Join the club hosting the challenge on <a href="https://www.strava.com" target="_blank">Strava</a>.</li>
+                <li>Once you've joined the club, you can join their challenges.</li>
+                <li>When the challenge starts it's time to head out and set your fastest time, you've got until the stage end date.</li>
+                <li>Included activities uploaded to Strava will count towards your overall position.</li>
+              </ol>
+            </div>
+
+            <br />
+            <br />
+
+            <p class="hero-buttons">
+              <a class="button is-primary is-outlined is-medium" href="<%= challenge_path(@conn, :index) %>">Find a challenge</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+
+<section class="section is-fullheight">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h1 class="title">Upcoming &amp; active challenges</h1>
+        <%= render SegmentChallengeWeb.SharedView, "challenges.html", challenges: @active_challenges, conn: @conn %>
+
+        <br />
+        <p class="has-text-centered"><a class="button" href="<%= challenge_path(@conn, :index) %>">View all challenges</a></p>
+      </div>
+
+      <div class="column">
+        <h1 class="title">Recent activity</h1>
+        <%= render SegmentChallengeWeb.ActivityView, "activity_feed.html", activities: @recent_activity, self: nil, paginate: false, conn: @conn %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render SegmentChallengeWeb.SharedView, "javascript_toggle.html" %>

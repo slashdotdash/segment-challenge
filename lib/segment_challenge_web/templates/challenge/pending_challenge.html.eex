@@ -1,0 +1,59 @@
+<div class="notification is-bold" style="margin-top: 1em;">
+  <div class="content">
+    <h3 class="title">Your challenge is almost ready to start</h3>
+
+    <div class="steps">
+      <div class="step-item is-completed is-primary">
+        <div class="step-marker">
+          <span class="icon">
+            <i class="fa fa-check"></i>
+          </span>
+        </div>
+        <div class="step-content">
+          <p class="step-title">Challenge created</p>
+        </div>
+      </div>
+      <div class="step-item <%= if Enum.any?(@stages) do %>is-completed<% else %>is-active<% end %>">
+        <div class="step-marker">
+          <span class="icon">
+            <i class="fa fa-map-marker"></i>
+          </span>
+        </div>
+        <div class="step-content">
+          <p class="step-title">Stages configured</p>
+          <%= unless @challenge.stages_configured do %>
+          <p><a class="is-primary" href="<%= stage_path(@conn, :new, @challenge.url_slug) %>">Add at least one stage</a>.</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="step-item <%= if Enum.any?(@stages) do %>is-active<% end %>">
+        <div class="step-marker">
+          <span class="icon">
+            <i class="fa fa-flag"></i>
+          </span>
+        </div>
+        <div class="step-content">
+          <p class="step-title">Challenge hosted</p>
+          <p><a href="<%= challenge_path(@conn, :host, @challenge.url_slug) %>">Host your challenge</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="columns has-text-centered">
+  <div class="column" style="margin-top: 1.25em;">
+    <p>
+      <a href="<%= challenge_path(@conn, :host, @challenge.url_slug) %>">Host your challenge</a> to make it <em>public</em>.
+    </p>
+  </div>
+
+  <div class="is-divider-vertical is-hidden-mobile" data-content="OR"></div>
+  <div class="is-divider is-hidden-tablet" data-content="OR"></div>
+
+  <div class="column" style="margin-top: 1.25em;">
+    <p>
+      <a href="#" class="modal-button" data-modal="cancel-challenge">Cancel your challenge</a> to remove it.
+    </p>
+  </div>
+</div>

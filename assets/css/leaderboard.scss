@@ -1,0 +1,47 @@
+.is-current-athlete {
+	background-color: $highlight !important;
+}
+
+.is-flagged, .is-flagged a, .is-flagged strong {
+	text-decoration: line-through;
+	color: #b5b5b5 !important;
+}
+
+.table {
+	.is-athlete-profile {
+		padding: 15px 0;
+
+		figure {
+			margin: 0 auto;
+		}
+	}
+}
+
+.is-leaderboard {
+  .title {
+    display: block;
+    text-align: center;
+  }
+
+  .subtitle {
+    display: block;
+    text-align: center;
+  }
+}
+
+.has-gained-position {
+  color: $primary;
+}
+
+.has-lost-position {
+  color: $warning;
+}
+
+.table {
+	td {
+		&.thin {
+			padding: 15px 10px;
+			width: 1%;
+		}
+	}
+}

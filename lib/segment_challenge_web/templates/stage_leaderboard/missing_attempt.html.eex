@@ -1,0 +1,5 @@
+<%= if @stage.status == "active" do %>
+  <p class="has-text-right">
+    <a href="<%= stage_path(@conn, :missing_attempt, @challenge.url_slug, @stage.url_slug) %>">Don't see your attempt?</a>
+  </p>
+<% end %>
